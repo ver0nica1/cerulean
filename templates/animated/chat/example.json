@@ -4,21 +4,20 @@
   "recipe": "chat",
   "data": {
     "names": {
-      "a": "Customer",
-      "b": "Assistant"
+      "a": "Store assistant"
     },
     "messages": [
       {
-        "from": "a",
+        "from": "b",
         "text": "Hi, where is my order?"
       },
       {
-        "from": "b",
+        "from": "a",
         "text": "It is on its way and arrives tomorrow afternoon.",
         "step": 2
       },
       {
-        "from": "a",
+        "from": "b",
         "text": "Thanks!",
         "step": 2
       }

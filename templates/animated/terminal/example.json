@@ -4,6 +4,7 @@
   "recipe": "terminal",
   "data": {
     "title": "server",
+    "frame": "mac",
     "lines": [
       "$ start service",
       "loading config…",
