@@ -1,0 +1,31 @@
+{
+  "title": "The swarm",
+  "theme": "fondo",
+  "recipe": "swarm",
+  "data": {
+    "groups": [
+      {
+        "label": "Bus",
+        "count": 45
+      },
+      {
+        "label": "Bike",
+        "count": 20
+      },
+      {
+        "label": "Car",
+        "count": 35
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "A hundred people, **mixed up**.",
+      "note": ""
+    },
+    {
+      "text": "Each one heads to their **ride**.",
+      "note": ""
+    }
+  ]
+}

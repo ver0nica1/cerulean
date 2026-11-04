@@ -1,0 +1,32 @@
+{
+  "title": "The container",
+  "theme": "fondo",
+  "recipe": "fill",
+  "data": {
+    "shape": "battery",
+    "levels": [
+      0.8,
+      0.25,
+      0.95
+    ],
+    "labels": [
+      "in the morning",
+      "mid-afternoon",
+      "after charging"
+    ]
+  },
+  "steps": [
+    {
+      "text": "The battery starts **full**.",
+      "note": ""
+    },
+    {
+      "text": "By afternoon, **little** is left.",
+      "note": ""
+    },
+    {
+      "text": "It **recharges**.",
+      "note": ""
+    }
+  ]
+}

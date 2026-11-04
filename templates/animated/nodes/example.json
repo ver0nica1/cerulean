@@ -1,0 +1,73 @@
+{
+  "title": "The nodes",
+  "theme": "fondo",
+  "recipe": "nodes",
+  "data": {
+    "hub": "api",
+    "flow": true,
+    "nodes": [
+      {
+        "id": "api",
+        "label": "API"
+      },
+      {
+        "id": "db",
+        "label": "Database",
+        "step": 2
+      },
+      {
+        "id": "cache",
+        "label": "Cache",
+        "step": 2
+      },
+      {
+        "id": "web",
+        "label": "Web"
+      },
+      {
+        "id": "queue",
+        "label": "Queue",
+        "step": 3,
+        "color": [
+          "accent",
+          "accent3"
+        ]
+      }
+    ],
+    "links": [
+      {
+        "from": "web",
+        "to": "api"
+      },
+      {
+        "from": "api",
+        "to": "db",
+        "step": 2
+      },
+      {
+        "from": "api",
+        "to": "cache",
+        "step": 2
+      },
+      {
+        "from": "api",
+        "to": "queue",
+        "step": 3
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "The **web** talks to the **API**.",
+      "note": ""
+    },
+    {
+      "text": "The API stores in the **database**.",
+      "note": ""
+    },
+    {
+      "text": "Slow jobs go to a **queue**.",
+      "note": ""
+    }
+  ]
+}

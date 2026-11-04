@@ -1,0 +1,389 @@
+/* Cerulean. Cada presentación trae su paleta: el servidor la pone en el style del <body> (--bg, --ink, --paper,
+   --paper-ink, --accent, --accent2, --accent3, --neutral y las versiones legibles como texto: --accent-text,
+   --accent-paper…). Aquí están los valores por defecto. Las escenas se diseñan en píxeles a 1600 × 900. */
+:root {
+  --bg: #3a2a22; --ink: #f4ede2; --paper: #efe6d8; --paper-ink: #2e241e;
+  --accent: #9b6cf0; --accent2: #e8b13a; --accent3: #f08a4b; --neutral: #8c7a6b;
+  --accent-text: #b592f5; --accent2-text: #e8b13a; --accent3-text: #f08a4b;
+  --accent-paper: #7a48d6; --accent2-paper: #8f6512; --accent3-paper: #b8582a;
+  --on-accent: #111111;
+  /* Tres voces: display (portada y títulos), text (tarjeta de pasos y botones) y num (cifras y rótulos). sans es el
+     texto corrido (notas); en una presentación con tipografías propias es la misma que text. */
+  --display: "Fredoka", "Outfit", system-ui, sans-serif;
+  --text: "Fredoka", "Outfit", system-ui, sans-serif;
+  --num: "Fredoka", "Outfit", system-ui, sans-serif;
+  --sans: "Outfit", system-ui, sans-serif;
+  --ease-pop: cubic-bezier(.3, 1.5, .5, 1);
+  --head: 124px;  /* la cabecera con el título: nada de la escena empieza por encima */
+}
+body, .tile, .t-fondo, .t-papel {
+  --bg2: color-mix(in srgb, var(--bg) 88%, var(--ink));
+  --line: color-mix(in srgb, var(--bg) 76%, var(--ink));
+  --mute: color-mix(in srgb, var(--ink) 66%, var(--bg));
+  /* Las cajas de las maquetas (diapositivas): una piel las cambia redefiniendo estos tokens. */
+  --panel: color-mix(in srgb, var(--bg) 82%, var(--ink));
+  --panel-shadow: 0 24px 50px -18px #00000088;
+}
+.t-papel { --panel: color-mix(in srgb, var(--paper) 70%, #ffffff); --panel-shadow: 0 24px 50px -22px #3a2a2266; }
+:root { --radius: 28px; --panel-line: 0 solid transparent; }
+/* Cada escena fija sus colores, también las oscuras: si no, dentro de un escenario claro heredarían el papel. */
+body { --fondo-bg: var(--bg); --fondo-ink: var(--ink); }
+.t-fondo { --bg: var(--fondo-bg); --ink: var(--fondo-ink); }
+.t-papel { --bg: var(--paper); --ink: var(--paper-ink); }
+/* El color de resaltado de cada escena: rota entre los tres acentos. */
+.t-fondo.h0 { --hl: var(--accent-text); } .t-fondo.h1 { --hl: var(--accent2-text); } .t-fondo.h2 { --hl: var(--accent3-text); }
+.t-papel.h0 { --hl: var(--accent-paper); } .t-papel.h1 { --hl: var(--accent2-paper); } .t-papel.h2 { --hl: var(--accent3-paper); }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--sans); font-synthesis: none; }
+a { color: inherit; }
+button { font: inherit; cursor: pointer; }
+.brand { font: 500 19px var(--display); text-decoration: none; }
+.brand b { color: var(--accent2); }
+.cta { background: var(--accent2); color: var(--on-accent); border: 0; border-radius: 999px; padding: 10px 22px; font: 500 16px var(--text); text-decoration: none; display: inline-block; }
+.cta:disabled { opacity: .6; cursor: wait; }
+
+.kick { font: 500 13px var(--text); text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); }
+
+/* =================================================================================================
+   El visor
+   ================================================================================================= */
+body.viewer { overflow: hidden; background: #0d0a08; }
+.screen { position: fixed; inset: 0 0 56px 0; overflow: hidden; }
+body.with-notes .screen { bottom: 200px; }
+body.fs .screen { bottom: 0; }
+/* El escenario cambia de color con la escena: el fondo se funde de oscuro a claro. */
+.stage { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; overflow: hidden;
+  background: var(--bg); color: var(--ink); transition: background-color .9s ease, color .9s ease; }
+
+/* La barra: a la izquierda, vista general, notas y el avance por escenas; al centro, anterior · posición · siguiente;
+   a la derecha, editar, PDF y pantalla completa. */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; height: 56px; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;
+  padding: 0 16px; background: #0d0a08; color: #f2efe6; transition: transform .3s; }
+.bar .side { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.bar .side.r { justify-content: flex-end; }
+.bar .mid { display: flex; align-items: center; gap: 12px; }
+.bar .count { min-width: 64px; text-align: center; font: 500 14px var(--text); font-variant-numeric: tabular-nums; opacity: .8; }
+.bar button { background: transparent; color: inherit; border: 1.5px solid transparent; border-radius: 999px; padding: 6px 13px; font: 500 14px var(--text); }
+.bar button:hover { border-color: #ffffff33; }
+.bar #prev, .bar #next { width: 38px; height: 38px; padding: 0; border-color: #ffffff55; font-size: 22px; line-height: 1; }
+.bar button[aria-pressed="true"] { background: var(--accent2); color: var(--on-accent); }
+.dots { display: flex; gap: 7px; margin-left: 12px; overflow: hidden; }
+.dots button { width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 0; opacity: .45; transition: opacity .3s, transform .3s; }
+.dots button.on { opacity: 1; transform: scale(1.35); }
+.c0 { background: var(--accent); } .c1 { background: var(--accent2); } .c2 { background: var(--accent3); }
+body.fs:not(.awake) .bar { transform: translateY(100%); }
+body.fs:not(.awake) { cursor: none; }
+.notes { position: fixed; left: 0; right: 0; bottom: 56px; height: 144px; z-index: 9; overflow: auto; padding: 14px 24px;
+  background: #1a1410; color: #f2efe6; border-top: 1px solid #ffffff22; font-size: 18px; line-height: 1.5; }
+.notes b { font: 500 13px var(--text); text-transform: uppercase; letter-spacing: .08em; color: var(--accent2); }
+.notes p { margin: 6px 0 0; max-width: 1100px; }
+
+/* ---- Miga de pan ---- */
+.crumb { position: absolute; left: 80px; right: 80px; top: 28px; z-index: 5; }
+.crumb .cc { display: grid; gap: 4px; line-height: 1.2; }
+.crumb .cc b { font: 600 32px/1.1 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crumb #where, .crumb .where { font-size: 19px; color: var(--mute); }
+/* Cada escena trae su propia copia de la cabecera: solo se ve en el PDF, donde no está la cabecera común. */
+.scene > .sh { display: none; }
+
+/* ---- La escena ---- */
+.scene { position: absolute; inset: 0; visibility: hidden; opacity: 0; transition: opacity .5s ease, translate .6s ease, visibility 0s .6s; }
+.scene.cur { visibility: visible; opacity: 1; transition: opacity .6s ease .15s, visibility 0s; }
+.scene.leave { visibility: visible; opacity: 0; translate: 0 -30px; }
+.scene .set { position: absolute; margin: 0; right: 30px; top: var(--head); width: 850px; aspect-ratio: 800 / 700;
+  translate: var(--lx, 0px) var(--ly, 0px); scale: var(--ls, 1); }
+.scene .set svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* La tarjeta de pasos: el paso actual en grande, los anteriores encogidos arriba. */
+.card { position: absolute; left: 80px; top: var(--head); bottom: 24px; height: fit-content; margin-block: auto;
+  /* Centrada entre la cabecera y el borde de abajo sin desplazarla: así ocupa en la página el mismo sitio que se ve
+     y el PDF nunca la parte. --lx y --ly son lo que la persona la movió en el modo edición. */
+  translate: var(--lx, 0px) var(--ly, 0px); max-height: calc(100% - var(--head) - 24px); overflow: hidden; width: 600px; padding: 40px 44px; border-radius: 34px;
+  background: color-mix(in srgb, var(--bg) 82%, var(--ink)); box-shadow: 0 24px 50px -18px #00000088, 0 2px 0 #ffffff10 inset; }
+.t-papel .card { background: color-mix(in srgb, var(--bg) 70%, #ffffff); box-shadow: 0 24px 50px -22px #3a2a2266; }
+.card ol { list-style: none; margin: 0; padding: 0; zoom: var(--fit, 1); }  /* --fit: lo encoge si no cabe bajo la cabecera */
+.card li { display: grid; grid-template-columns: auto 1fr; gap: 0 18px; }
+.card li .num { font: 500 42px/1.15 var(--num); color: var(--hl); transition: font-size .5s ease; }
+.card li .tx { margin: 0; font: 400 42px/1.22 var(--text); transition: font-size .5s ease, color .5s; }
+.card li .tx strong { color: var(--hl); font-weight: 600; }
+.card li .note { margin: 18px 0 0; font-size: 23px; line-height: 1.4; color: var(--mute); }
+.card li.past { padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1.5px solid var(--line); }
+.card li.past .num { font-size: 22px; color: var(--mute); }
+.card li.past .tx { font-size: 22px; line-height: 1.35; color: var(--mute); }
+.card li.past .tx strong { color: inherit; font-weight: 500; }
+.card li.past .note { display: none; }
+.card li.future { display: none; }
+.card li.now { animation: stepIn .7s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes stepIn { from { opacity: 0; transform: translateY(26px); } }
+
+/* ---- Las piezas de la maqueta: cómo entran y cómo se van ----
+   --u convierte píxeles de pantalla a unidades de la maqueta (que está escalada). */
+.o { opacity: 0; transform-box: fill-box; transition: opacity .45s ease, translate .9s cubic-bezier(.22, 1.25, .4, 1), scale .9s cubic-bezier(.22, 1.2, .4, 1); }
+.o.e-drop { translate: 0 calc(-170px * var(--u, 1)); }
+.o.e-rise { translate: 0 calc(110px * var(--u, 1)); }
+.o.e-grow { scale: 1 .02; transform-origin: 50% 100%; }
+.o.e-pop { scale: .15; transform-origin: 50% 50%; }
+.o.in { opacity: 1; translate: none; scale: none; transition-delay: var(--d, 0s); }
+.o.gone { opacity: 0; translate: 0 calc(-70px * var(--u, 1)); scale: none; transition-delay: 0s; }
+.o .dw { stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s cubic-bezier(.5, 0, .2, 1); }
+.o.in .dw { stroke-dashoffset: 0; transition-delay: var(--d, 0s); }
+/* Vida tranquila cuando la escena ya está armada: las partículas flotan y lo que brilla late. */
+.o.in .pt { animation: drift 3.6s ease-in-out infinite alternate; animation-delay: calc(var(--j) * -230ms); }
+@keyframes drift { to { translate: 0 calc(-7px * var(--u, 1)); } }
+.o.in .pulse { animation: pulse 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 50% { scale: 1.12; opacity: .75; } }
+
+/* ---- Etiquetas, como rótulos sobre la maqueta ---- */
+.lead { stroke: var(--ink); stroke-width: 1.6; opacity: 0; transition: opacity .4s; }
+.lead.in { opacity: .5; transition-delay: var(--d, 0s); }
+.lab { position: absolute; translate: -14% -100%; display: grid; padding: 8px 16px 10px; border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 78%, var(--ink)); box-shadow: 0 10px 24px -12px #00000099; white-space: nowrap;
+  opacity: 0; scale: .7; transform-origin: 20% 100%; transition: opacity .35s ease, scale .5s var(--ease-pop); }
+.t-papel .lab { background: #fffaf2; }
+.lab.r { translate: -86% -100%; transform-origin: 80% 100%; }
+.lab span { font: 500 19px var(--text); color: var(--c, var(--hl)); }
+.lab b { font: 600 30px/1.1 var(--num); }
+.lab.c-accent { --c: var(--accent-text); } .lab.c-accent2 { --c: var(--accent2-text); } .lab.c-accent3 { --c: var(--accent3-text); }
+.t-papel .lab.c-accent { --c: var(--accent-paper); } .t-papel .lab.c-accent2 { --c: var(--accent2-paper); } .t-papel .lab.c-accent3 { --c: var(--accent3-paper); }
+.lab.c-ink { --c: var(--mute); }
+.lab.in { opacity: 1; scale: 1; transition-delay: var(--d, 0s); }
+
+/* ---- Portada ---- */
+.cover-txt { position: absolute; left: 90px; top: 40px; bottom: 0; height: fit-content; margin-block: auto;
+  translate: var(--lx, 0px) var(--ly, 0px); width: 700px; z-index: 2; }
+.cover .kick { font-size: 22px; color: var(--hl); margin: 0 0 18px; }
+.cover h1 { font: 500 96px/1.02 var(--display); margin: 0; letter-spacing: -.01em; }
+.cover h1 .w { display: inline-block; opacity: 0; translate: 0 .28em; margin-right: .24em; }
+.cover.cur h1 .w { animation: wordIn .9s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: calc(var(--i) * 90ms + 200ms); }
+@keyframes wordIn { to { opacity: 1; translate: none; } }
+.cover .dek { font-size: 30px; line-height: 1.35; color: var(--mute); margin: 30px 0 0; opacity: 0; }
+.cover.cur .dek { animation: fadeIn 1s ease 1s forwards; }
+.toc { display: flex; gap: 12px; margin-top: 40px; }
+.toc button { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; opacity: 0; scale: .2; }
+.cover.cur .toc button { animation: popIn .5s cubic-bezier(.3, 1.6, .5, 1) forwards; animation-delay: calc(var(--i) * 70ms + 1.3s); }
+@keyframes popIn { to { opacity: 1; scale: 1; } }
+@keyframes fadeIn { to { opacity: 1; } }
+.cover .set { width: 860px; right: 30px; top: 90px; }
+
+/* ---- Final ---- */
+.end-card { width: 640px; }
+.end-card .kick { color: var(--hl); font-size: 20px; margin: 0 0 12px; }
+.end-card .keep { font: 500 48px/1.15 var(--display); margin: 0 0 22px; }
+.end-card ul { margin: 0 0 30px; padding-left: 24px; font-size: 24px; line-height: 1.4; color: var(--mute); }
+.end-card .cta { font-size: 22px; padding: 14px 28px; }
+
+/* ---- Sin animación (vista general, PDF) ---- */
+body.snap .stage *, body.snap .stage *::before { transition: none !important; animation: none !important; }
+body.snap .cover h1 .w, body.snap .cover .dek, body.snap .toc button { opacity: 1; translate: none; scale: none; }
+
+/* ---- Vista general: todas las escenas en miniatura ---- */
+body.grid .screen { overflow: auto; }
+body.grid .stage { position: static; width: auto; height: auto; transform: none !important; overflow: visible; background: none;
+  display: grid; gap: 22px; padding: 28px; grid-template-columns: repeat(auto-fill, 320px); justify-content: center; }
+body.grid .crumb { display: none; }
+body.grid .scene { position: relative; inset: auto; visibility: visible; opacity: 1; translate: none; width: 320px; height: 180px;
+  overflow: hidden; border-radius: 10px; cursor: pointer; background: var(--bg); color: var(--ink); }
+body.grid .scene > * { zoom: .2; }
+body.grid .scene.cur { outline: 3px solid var(--accent2); outline-offset: 3px; }
+
+/* ---- PDF: una escena por página ---- */
+@page { size: 1600px 900px; margin: 0; }
+@media print {
+  body.viewer { overflow: visible; background: none; }
+  .bar, .notes, .stage > .crumb, .editbar, .grip { display: none !important; }
+  .scene > .sh { display: block; }
+  .scene .card, .scene .set, .cover-txt { outline: none !important; }
+  .screen { position: static; overflow: visible; }
+  .stage { position: static; transform: none !important; width: 1600px; height: auto; overflow: visible; background: none; }
+  .scene { position: relative; inset: auto; visibility: visible !important; opacity: 1 !important; translate: none !important;
+    width: 1600px; height: 900px; break-after: page; break-inside: avoid; background: var(--bg); color: var(--ink); overflow: hidden; }
+  .scene:last-child { break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .o, .lab, .lead, .scene, .card li.now { transition: none !important; animation: none !important; }
+}
+@media (max-width: 760px) {
+  .dock { margin: 72px 16px 0; padding: 20px; }
+  .dots, #b-pdf { display: none; }
+  .bar button { padding: 6px 8px; }
+}
+
+/* =================================================================================================
+   Escenas con imagen: captura en un marco de navegador o de celular, o foto
+   ================================================================================================= */
+.set.shot { display: flex; align-items: center; justify-content: center; height: 744px; }
+.frame { position: relative; flex: none; opacity: 0; translate: 0 50px; scale: .96;
+  transition: opacity .7s ease .2s, translate 1s cubic-bezier(.2, .9, .3, 1.1) .2s, scale 1s cubic-bezier(.2, .9, .3, 1.1) .2s; }
+.scene.cur .frame { opacity: 1; translate: none; scale: none; }
+.frame.f-browser { border-radius: 18px; overflow: hidden; background: color-mix(in srgb, var(--bg) 60%, var(--ink));
+  box-shadow: 0 40px 80px -30px #000000aa, 0 0 0 1.5px color-mix(in srgb, var(--ink) 18%, transparent); }
+.frame .chrome { height: 46px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: color-mix(in srgb, var(--bg) 72%, var(--ink)); }
+.frame .chrome i { width: 13px; height: 13px; border-radius: 50%; background: color-mix(in srgb, var(--ink) 30%, var(--bg)); }
+.frame .chrome i:nth-child(1) { background: #ef6a5e; } .frame .chrome i:nth-child(2) { background: #f4be4f; } .frame .chrome i:nth-child(3) { background: #61c454; }
+.frame .chrome .url { margin-left: 18px; flex: 1; max-width: 420px; padding: 5px 16px; border-radius: 999px; font-size: 16px;
+  background: color-mix(in srgb, var(--bg) 85%, var(--ink)); color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.frame.f-phone { padding: 14px; border-radius: 54px; background: #15110e; box-shadow: 0 40px 80px -30px #000000aa, inset 0 0 0 2px #ffffff22; }
+.frame.f-phone .view { border-radius: 40px; }
+.frame.f-photo .view { border-radius: 26px; box-shadow: 0 40px 80px -30px #000000aa; }
+.view { position: relative; overflow: hidden; background: color-mix(in srgb, var(--bg) 85%, var(--ink)); }
+.canvas { position: absolute; inset: 0; transform-origin: 0 0; transition: transform 1.2s cubic-bezier(.65, 0, .25, 1); }
+.canvas img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+/* Resalte: un recuadro del color de la escena; el resto de la imagen se oscurece. */
+.mark { position: absolute; border-radius: 10px; border: 4px solid var(--hl); opacity: 0;
+  box-shadow: 0 0 0 4000px #0000006b; transition: opacity .5s ease; }
+.mark.in { opacity: 1; transition-delay: var(--d, 0s); }
+/* Rótulo con su punto, encima de la zona que señala. */
+.pin { position: absolute; width: 0; height: 0; opacity: 0; transition: left 1.2s cubic-bezier(.65, 0, .25, 1), top 1.2s cubic-bezier(.65, 0, .25, 1), opacity .35s; }
+.pin.in { opacity: 1; transition-delay: 0s, 0s, var(--d, 0s); }
+.pin .dot { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; background: var(--c, var(--hl));
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--c, var(--hl)) 35%, transparent); scale: .2; transition: scale .5s cubic-bezier(.3, 1.6, .5, 1); }
+.pin.in .dot { scale: 1; transition-delay: var(--d, 0s); }
+.pin .lab { left: -22px; top: -26px; scale: .7; opacity: 0; }
+.pin.r .lab { left: auto; right: -22px; translate: 0 -100%; transform-origin: 80% 100%; }
+.pin:not(.r) .lab { translate: 0 -100%; }
+.pin.in .lab { opacity: 1; scale: 1; transition-delay: var(--d, 0s); }
+.pin.c-accent { --c: var(--accent); } .pin.c-accent2 { --c: var(--accent2); } .pin.c-accent3 { --c: var(--accent3); } .pin.c-ink { --c: var(--ink); }
+/* Espacio reservado para una imagen que falta */
+.view.empty { display: grid; place-items: center; border: 3px dashed color-mix(in srgb, var(--ink) 30%, transparent); }
+.f-browser .view.empty, .f-phone .view.empty { border-top-width: 0; }
+.ph { display: grid; justify-items: center; gap: 10px; padding: 30px; text-align: center; color: var(--mute); max-width: 80%; }
+.ph svg { width: 72px; height: 72px; color: var(--hl); }
+.ph b { font: 500 30px/1.2 var(--display); color: var(--ink); }
+.ph span { font-size: 19px; line-height: 1.4; }
+
+/* =================================================================================================
+   Modo edición
+   ================================================================================================= */
+.editbar { position: fixed; left: 0; right: 0; top: 0; z-index: 100; display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; background: #1d1712; color: #f2efe6; border-bottom: 2px solid var(--accent2); font-size: 14px; }
+.editbar[hidden] { display: none; }
+.editbar .msg { flex: 1; color: #f2efe6cc; }
+.editbar .state { color: var(--accent2); font-weight: 500; white-space: nowrap; }
+.editbar button { background: transparent; color: inherit; border: 1.5px solid #ffffff44; border-radius: 999px; padding: 6px 14px; font: 500 14px var(--text); }
+.editbar button.primary { background: var(--accent2); border-color: var(--accent2); color: var(--on-accent); }
+body.editing .screen { top: 52px; }
+body.editing [data-edit] { outline: 2px dashed color-mix(in srgb, var(--accent2) 70%, transparent); outline-offset: 4px; border-radius: 6px; cursor: text; }
+body.editing [data-edit]:hover { outline-style: solid; }
+body.editing [data-edit]:focus { outline: 3px solid var(--accent2); background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+body.editing .card li.future { display: grid; opacity: .5; }
+body.editing .card li.future .tx, body.editing .card li.future .num { font-size: 22px; }
+body.editing .lab, body.editing .pin { opacity: 1 !important; scale: 1 !important; }
+body.editing .scene.drop::after { content: ""; position: absolute; inset: 16px; border: 6px dashed var(--accent2); border-radius: 30px; pointer-events: none; }
+.notes p:empty::before { content: attr(data-empty); opacity: .5; }
+.bar #b-edit[aria-pressed="true"] { background: var(--accent2); color: var(--on-accent); }
+
+/* =================================================================================================
+   Escenas programadas (kit.js)
+   ================================================================================================= */
+.set.code svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.k-over { position: absolute; inset: 0; pointer-events: none; }
+.set.code .lab { transition: none; }  /* la escena programada mueve sus rótulos ella misma */
+.set.code .kt { font-family: var(--num); }
+.k-err { position: absolute; inset: 20% 10%; display: grid; place-content: center; gap: 10px; text-align: center; padding: 30px;
+  border: 3px dashed #d9534f; border-radius: 26px; color: var(--ink); font-size: 20px; }
+.k-err b { font: 500 28px var(--display); color: #e57373; }
+.k-err span { font: 16px ui-monospace, monospace; opacity: .8; }
+
+/* =================================================================================================
+   Dirección visual: el estilo de dibujo (data-medium) y el temperamento (data-motion) de cada presentación.
+   build.py los pone en el <body>; sin ellos se ve el aspecto por defecto de arriba.
+   ================================================================================================= */
+/* Estilo de dibujo: la tarjeta y los rótulos acompañan al dibujo. */
+[data-medium="plano"] .card { border-radius: 22px; box-shadow: none; }
+[data-medium="plano"] .lab { border-radius: 10px; box-shadow: none; }
+[data-medium="tecnico"] .card { border-radius: 6px; box-shadow: none; border: 1.5px solid var(--line); }
+[data-medium="tecnico"] .lab { border-radius: 3px; box-shadow: none; border: 1.5px solid var(--line); }
+[data-medium="tecnico"] .card li.past { border-bottom-style: dashed; }
+[data-medium="grabado"] .card { border-radius: 2px; box-shadow: none; border: 2px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 5px; }
+[data-medium="grabado"] .lab { border-radius: 0; box-shadow: none; border: 1.5px solid var(--ink); }
+[data-medium="recorte"] .card { border-radius: 30px 10px 30px 10px; box-shadow: 6px 10px 0 -2px #00000030, 0 22px 40px -20px #00000088; }
+[data-medium="recorte"] .lab { border-radius: 14px 4px 14px 4px; box-shadow: 3px 5px 0 -1px #00000030; }
+[data-medium="bauhaus"] .card { border-radius: 0; box-shadow: 14px 14px 0 var(--accent); }
+[data-medium="bauhaus"] .lab { border-radius: 0; box-shadow: 6px 6px 0 var(--accent2); }
+[data-medium="bauhaus"] .card li .num { font-weight: 700; }
+
+/* Temperamento: cómo entran el título de portada, cada paso nuevo y cada escena. */
+[data-motion="preciso"] { --ease-pop: cubic-bezier(.7, 0, .2, 1); }
+[data-motion="preciso"] .cover h1 .w { translate: 0 .5em; clip-path: inset(0 0 100% 0); }
+[data-motion="preciso"] .cover.cur h1 .w { animation: wordCut .55s cubic-bezier(.7, 0, .2, 1) forwards; animation-delay: calc(var(--i) * 45ms + 150ms); }
+@keyframes wordCut { to { opacity: 1; translate: none; clip-path: inset(0 0 -10% 0); } }
+[data-motion="preciso"] .card li.now { animation: stepCut .45s cubic-bezier(.7, 0, .2, 1) both; }
+@keyframes stepCut { from { opacity: 0; transform: translateX(-22px); } }
+[data-motion="preciso"] .scene.cur { transition: opacity .35s linear .05s, visibility 0s; }
+
+[data-motion="fluido"] { --ease-pop: cubic-bezier(.45, 0, .25, 1); }
+[data-motion="fluido"] .cover h1 .w { translate: 0 .15em; filter: blur(10px); }
+[data-motion="fluido"] .cover.cur h1 .w { animation: wordMist 1.4s ease-out forwards; animation-delay: calc(var(--i) * 140ms + 200ms); }
+@keyframes wordMist { to { opacity: 1; translate: none; filter: none; } }
+[data-motion="fluido"] .card li.now { animation: stepMist 1s ease-out both; }
+@keyframes stepMist { from { opacity: 0; filter: blur(6px); transform: translateY(12px); } }
+[data-motion="fluido"] .scene.cur { transition: opacity 1s ease .2s, visibility 0s; }
+
+[data-motion="energico"] { --ease-pop: cubic-bezier(.3, 1.8, .5, 1); }
+[data-motion="energico"] .cover h1 .w { translate: 0 .6em; scale: .7; }
+[data-motion="energico"] .cover.cur h1 .w { animation: wordBounce .7s cubic-bezier(.3, 1.6, .5, 1) forwards; animation-delay: calc(var(--i) * 70ms + 150ms); }
+@keyframes wordBounce { to { opacity: 1; translate: none; scale: none; } }
+[data-motion="energico"] .card li.now { animation: stepBounce .6s cubic-bezier(.3, 1.5, .5, 1) both; }
+@keyframes stepBounce { from { opacity: 0; transform: translateY(34px) scale(.94); } }
+[data-motion="energico"] .scene.cur { transition: opacity .4s ease .05s, visibility 0s; }
+
+[data-motion="solemne"] { --ease-pop: cubic-bezier(.4, 0, .2, 1); }
+[data-motion="solemne"] .cover h1 .w { translate: none; letter-spacing: .12em; }
+[data-motion="solemne"] .cover.cur h1 .w { animation: wordSolemn 2s cubic-bezier(.4, 0, .2, 1) forwards; animation-delay: calc(var(--i) * 260ms + 300ms); }
+@keyframes wordSolemn { to { opacity: 1; letter-spacing: 0; } }
+[data-motion="solemne"] .cover.cur .dek { animation-duration: 1.8s; animation-delay: 1.6s; }
+[data-motion="solemne"] .card li.now { animation: stepFade 1.3s ease both; }
+@keyframes stepFade { from { opacity: 0; } }
+[data-motion="solemne"] .scene.cur { transition: opacity 1.3s ease .3s, visibility 0s; }
+body.snap .cover h1 .w { clip-path: none; filter: none; letter-spacing: normal; }
+
+/* Grano de papel (grabado y recorte): una textura de ruido fija sobre toda la diapositiva. */
+[data-medium="grabado"] .stage::after, [data-medium="recorte"] .stage::after { content: ""; position: absolute; inset: 0; z-index: 6;
+  pointer-events: none; opacity: .4; mix-blend-mode: soft-light; background-size: 260px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+body.grid .stage::after { display: none; }
+
+/* ---- Modo edición: mover la tarjeta y la ilustración, y cambiar el tamaño de la ilustración ---- */
+.grip { display: none; position: absolute; z-index: 8; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%;
+  background: var(--accent2); color: var(--on-accent); font: 600 18px/34px var(--text); text-align: center; cursor: grab;
+  box-shadow: 0 4px 12px -4px #00000099; touch-action: none; }
+.grip.size { cursor: nwse-resize; }
+body.editing .grip { display: block; }
+body.editing .scene .card, body.editing .scene .set, body.editing .cover-txt { outline: 2px dashed color-mix(in srgb, var(--accent2) 70%, transparent); outline-offset: 6px; }
+body.dragging, body.dragging * { cursor: grabbing !important; user-select: none; }
+
+/* Avisos breves (por ejemplo, mientras se arma el PDF). */
+.toast { position: fixed; left: 50%; bottom: 72px; translate: -50% 0; z-index: 30; max-width: min(640px, calc(100vw - 32px));
+  padding: 10px 18px; border-radius: 12px; background: #1d1712; color: #f2efe6; font: 500 15px/1.4 var(--text);
+  box-shadow: 0 10px 30px -10px #000000aa; text-align: center; }
+@media print { .toast { display: none !important; } }
+
+/* =================================================================================================
+   Formato diapositivas: la base que comparten las maquetas de templates/static/ (cada una trae su propio CSS).
+   ================================================================================================= */
+/* En las diapositivas el texto secundario es más pequeño que en la tarjeta: va algo más oscuro para leerse bien. */
+.slide { --mute: color-mix(in srgb, var(--ink) 80%, var(--bg)); }
+.slide .sl { position: absolute; inset: var(--head) 110px 64px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+.slide .kick { margin: 0; font: 700 20px var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--hl); }
+.slide h2 { margin: 0; font: 600 64px/1.08 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.slide p { margin: 0; }
+.slide strong { color: var(--hl); font-weight: 700; }
+.slide .panel { background: var(--panel); border: var(--panel-line); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 34px 38px; }
+.slide .muted { color: var(--mute); }
+/* Cada elemento entra en su paso, escalonado con los de ese paso (--i). */
+.slide .rv { opacity: 0; translate: 0 28px; transition: opacity .55s ease, translate .8s var(--ease-pop); transition-delay: calc(var(--i, 0) * 90ms + 120ms); }
+.slide .rv.in { opacity: 1; translate: none; }
+@media (prefers-reduced-motion: reduce) { .slide .rv { transition: none !important; } }
+body.snap .slide .rv { opacity: 1; translate: none; }
+/* Imagen dentro de una diapositiva (maqueta image-text): la foto o un espacio reservado que dice qué va ahí. */
+.slide .pic { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--panel); }
+.slide .pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.slide .pic.empty { display: grid; place-content: center; gap: 10px; padding: 30px; text-align: center; color: var(--mute);
+  border: 3px dashed var(--line); background: none; font: 500 22px/1.35 var(--text); }
+/* Portada sin ilustración: el título ocupa el ancho. */
+.cover.solo .cover-txt { left: 110px; width: 1300px; }
+.cover.solo .cover-txt h1 { font-size: 112px; }
+.cover.solo .set { display: none; }

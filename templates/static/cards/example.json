@@ -1,0 +1,22 @@
+{
+  "slide": "cards",
+  "theme": "fondo",
+  "title": "Three ways to talk",
+  "items": [
+    {
+      "tag": "01",
+      "title": "Chat",
+      "text": "For quick questions that block no one."
+    },
+    {
+      "tag": "02",
+      "title": "Short meeting",
+      "text": "To decide something among several people."
+    },
+    {
+      "tag": "03",
+      "title": "Document",
+      "text": "For what we need to remember tomorrow."
+    }
+  ]
+}

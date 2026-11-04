@@ -1,0 +1,27 @@
+{
+  "slide": "timeline",
+  "theme": "papel",
+  "title": "How we will try it",
+  "events": [
+    {
+      "date": "Week 1",
+      "title": "Agree",
+      "text": "We write the rules together."
+    },
+    {
+      "date": "Week 2",
+      "title": "Try",
+      "text": "We apply them to one project."
+    },
+    {
+      "date": "Week 3",
+      "title": "Review",
+      "text": "We look at what worked."
+    },
+    {
+      "date": "Week 4",
+      "title": "Adjust",
+      "text": "We change what did not."
+    }
+  ]
+}

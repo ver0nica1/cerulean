@@ -1,0 +1,30 @@
+/* @style
+{
+ "name": "My style",
+ "scheme": "mixed",
+ "mood": ["calm", "clear"],
+ "best_for": "the topics this look fits",
+ "avoid_for": "the topics it would feel wrong for",
+ "palette": {"bg": "#1d2430", "ink": "#f2f4f7", "paper": "#f6f3ec", "paper_ink": "#1d2430",
+             "accent": "#e0a030", "accent2": "#3fa58a", "accent3": "#d9534f", "neutral": "#7a8494"},
+ "fonts": {"display": "Manrope", "text": "Manrope", "num": "JetBrains Mono"},
+ "rhythm": "alterno",
+ "medium": "plano",
+ "motion": "preciso"
+}
+@end */
+
+/* Copy this folder to styles/<your-slug>/ and edit it. Folders that start with "_" are ignored.
+   The header is plain JSON. scheme: dark | light | mixed. rhythm: alterno | oscuro | claro.
+   Fonts: a name build.py knows, or "Name:400;700" for any Google font.
+   Below goes the skin: plain CSS for the parts a style may restyle (see references/direction.md).
+   It must not touch .bar, .notes or .stage, nor use @import, external url() or position: fixed. */
+
+/* Explainer: the step card, the cover and the labels. */
+.card { border-radius: 14px; }
+.cover h1 { letter-spacing: -.02em; }
+.lab { border-radius: 8px; }
+
+/* Slides: the shared panel tokens, then any layout by its .l-<slug> class. */
+.slide { --radius: 14px; }
+.slide h2 { letter-spacing: -.02em; }

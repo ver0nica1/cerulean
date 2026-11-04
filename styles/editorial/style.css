@@ -1,0 +1,33 @@
+/* @style
+{
+ "name": "Editorial magazine",
+ "scheme": "light",
+ "mood": ["editorial", "serious", "elegant", "journalistic"],
+ "best_for": "current affairs, society, culture, history, reports and analysis, talks for adults",
+ "avoid_for": "children, gaming, very playful or technical-hacker topics",
+ "palette": {"bg": "#16181d", "ink": "#f2ede4", "paper": "#f4efe6", "paper_ink": "#1a1714",
+             "accent": "#c8372d", "accent2": "#2b5c8a", "accent3": "#b8892c", "neutral": "#6b6258"},
+ "fonts": {"display": "Playfair Display", "text": "Libre Franklin:400;500;600;700", "num": "Playfair Display"},
+ "rhythm": "claro",
+ "medium": "plano",
+ "motion": {"smooth": 0.12, "curve": [0.65, 0, 0.25, 1]}
+}
+@end */
+
+/* A serious magazine spread: serif headlines, hairline rules instead of boxes, small-caps kickers in red, no rounded
+   corners and no soft shadows. */
+.card { border-radius: 0; box-shadow: none; background: transparent; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); padding: 30px 6px; }
+.card li .num { font-style: italic; }
+.card li.past .tx { font-style: italic; }
+.cover h1 { font-weight: 700; letter-spacing: -.02em; }
+.cover .kick { font-weight: 700; letter-spacing: .22em; border-top: 2px solid currentColor; padding-top: 14px; display: inline-block; }
+.lab { border-radius: 0; box-shadow: none; border-top: 2px solid var(--ink); background: var(--bg); }
+.end-card { border-radius: 0; box-shadow: none; background: transparent; border-top: 6px double var(--ink); }
+
+.slide { --radius: 0px; --panel: transparent; --panel-shadow: none; }
+.slide .panel { border-top: 3px solid var(--ink); padding: 26px 4px 0; }
+.slide h2 { font-weight: 700; letter-spacing: -.02em; }
+.slide .kick { font-weight: 700; letter-spacing: .22em; }
+.slide .kick::after { content: ""; display: block; width: 64px; height: 2px; margin-top: 14px; background: currentColor; }
+.l-statement .st-tx { font-style: italic; font-weight: 500; }
+.l-quote .qu-tx { font-style: italic; }

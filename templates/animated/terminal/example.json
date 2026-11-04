@@ -1,0 +1,40 @@
+{
+  "title": "The console",
+  "theme": "papel",
+  "recipe": "terminal",
+  "data": {
+    "title": "server",
+    "lines": [
+      "$ start service",
+      "loading config…",
+      {
+        "text": "error: port already in use",
+        "step": 2,
+        "color": "accent3"
+      },
+      {
+        "text": "$ retry",
+        "step": 2
+      },
+      {
+        "text": "service running",
+        "step": 3,
+        "color": "accent2"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "The **service** starts.",
+      "note": ""
+    },
+    {
+      "text": "An **error** shows up.",
+      "note": ""
+    },
+    {
+      "text": "On retry, it **works**.",
+      "note": ""
+    }
+  ]
+}

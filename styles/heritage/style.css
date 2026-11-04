@@ -1,0 +1,33 @@
+/* @style
+{
+ "name": "Period print",
+ "scheme": "light",
+ "mood": ["historical", "solemn", "literary", "printed"],
+ "best_for": "history, revolutions, literature, philosophy, old documents, biographies, heritage",
+ "avoid_for": "technology, startups, children, sports",
+ "palette": {"bg": "#2a2019", "ink": "#f1e6d2", "paper": "#efe4cf", "paper_ink": "#2b211a",
+             "accent": "#b23a2e", "accent2": "#2f5d8a", "accent3": "#b8913a", "neutral": "#6e5a45"},
+ "fonts": {"display": "Cormorant Garamond", "text": "EB Garamond", "num": "Cormorant Garamond"},
+ "rhythm": "claro",
+ "medium": "grabado",
+ "motion": "solemne"
+}
+@end */
+
+/* A pamphlet from a clandestine press: rag paper, double black rules, centered ornaments and roman numerals. */
+.card { border-radius: 0; box-shadow: none; background: transparent; border: 3px double var(--ink); padding: 34px 38px; }
+.card li .num { font-style: italic; font-weight: 600; }
+.card li.now .tx { font-weight: 500; }
+.cover h1 { font-weight: 600; letter-spacing: .01em; }
+.cover .kick { font-variant: small-caps; text-transform: none; letter-spacing: .2em; font-size: 26px; }
+.cover .kick::after { content: " \2766"; }
+.lab { border-radius: 0; box-shadow: none; background: var(--bg); border: 3px double currentColor; }
+.end-card { border-radius: 0; box-shadow: none; background: transparent; border: 3px double var(--ink); text-align: center; }
+.end-card .keep::before, .end-card .keep::after { content: "\2766"; display: block; font-size: 26px; color: var(--hl); }
+
+.slide { --radius: 0px; --panel: transparent; --panel-shadow: none; --panel-line: 3px double var(--ink); }
+.slide h2 { font-weight: 600; font-size: 76px; }
+.l-section h2 { font-size: 112px; }
+.slide .kick { font-variant: small-caps; text-transform: none; letter-spacing: .2em; font-size: 24px; }
+.slide .kick::after { content: " \2766"; }
+.l-quote .qu-tx, .l-statement .st-tx { font-style: italic; font-weight: 500; }

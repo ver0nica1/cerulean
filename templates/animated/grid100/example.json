@@ -1,0 +1,26 @@
+{
+  "title": "The grid",
+  "theme": "papel",
+  "recipe": "grid100",
+  "data": {
+    "values": [
+      30,
+      72
+    ],
+    "glyph": "persona",
+    "labels": [
+      "use the app every week",
+      "would recommend it"
+    ]
+  },
+  "steps": [
+    {
+      "text": "First, **30 out of 100**.",
+      "note": ""
+    },
+    {
+      "text": "Then, **72 out of 100**.",
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "The board",
+  "theme": "fondo",
+  "recipe": "board",
+  "data": {
+    "title": "TESTS",
+    "rows": [
+      {
+        "label": "Test 01",
+        "status": [
+          "RUNNING",
+          "PASSED"
+        ]
+      },
+      {
+        "label": "Test 02",
+        "status": [
+          "RUNNING",
+          "FAILED"
+        ]
+      },
+      {
+        "label": "Test 03",
+        "status": "PASSED"
+      },
+      {
+        "label": "Test 04",
+        "status": [
+          "RUNNING",
+          "PASSED"
+        ]
+      }
+    ],
+    "colors": {
+      "PASSED": "accent2",
+      "FAILED": "accent3"
+    }
+  },
+  "steps": [
+    {
+      "text": "Four tests are **running**.",
+      "note": ""
+    },
+    {
+      "text": "Three end **well**, one **fails**.",
+      "note": ""
+    }
+  ]
+}

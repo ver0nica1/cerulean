@@ -1,0 +1,46 @@
+/* @style
+{
+ "name": "Server terminal",
+ "scheme": "dark",
+ "mood": ["technical", "hacker", "precise", "nocturnal"],
+ "best_for": "cybersecurity, software, servers and networks, programming, data breaches, how computers work",
+ "avoid_for": "children, nature, history, warm or emotional topics",
+ "palette": {"bg": "#0d1310", "ink": "#d6f2da", "paper": "#e7ede4", "paper_ink": "#13201a",
+             "accent": "#ffb547", "accent2": "#46d37a", "accent3": "#ff6b5e", "neutral": "#4d5a52"},
+ "fonts": {"display": "Silkscreen", "text": "Space Mono", "num": "Space Mono"},
+ "rhythm": "oscuro",
+ "medium": "tecnico",
+ "motion": {"smooth": 0.18, "curve": [0.8, 0, 0.2, 1]}
+}
+@end */
+
+/* A server console at midnight: terminal type everywhere, one-pixel frames, no rounded corners, the current step with
+   a blinking cursor and the previous ones as log lines. Faint scan lines over the whole slide. */
+.card { border-radius: 0; padding: 30px 34px; background: color-mix(in srgb, var(--bg) 70%, #000);
+  border: 1px solid var(--accent2); box-shadow: 6px 6px 0 color-mix(in srgb, var(--accent2) 25%, transparent); }
+.t-papel .card { background: var(--paper); border-color: var(--paper-ink); box-shadow: 6px 6px 0 #00000030; }
+.card li .num::before { content: "["; } .card li .num::after { content: "]"; }
+.card li .num { font-size: 26px; }
+.card li .tx { font-size: 32px; line-height: 1.3; }
+.card li.now .tx::after { content: "_"; margin-left: 6px; color: var(--hl); animation: cursor 1s steps(1) infinite; }
+@keyframes cursor { 50% { opacity: 0; } }
+.card li.past .tx::before { content: "> "; color: var(--hl); }
+.card li.now { animation: typeIn .5s steps(8) both; }
+@keyframes typeIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+.cover h1 { font-size: 78px; line-height: 1.05; color: var(--accent2); text-shadow: 0 0 18px color-mix(in srgb, var(--accent2) 45%, transparent); }
+.cover .kick::before { content: "$ "; }
+
+.lab { border-radius: 0; border: 1px solid currentColor; box-shadow: none; background: var(--bg); }
+
+/* Slides: panels are console windows; titles carry a prompt. */
+.slide { --radius: 0px; --panel: color-mix(in srgb, var(--bg) 70%, #000); --panel-line: 1px solid var(--accent2);
+  --panel-shadow: 6px 6px 0 color-mix(in srgb, var(--accent2) 25%, transparent); }
+.t-papel.slide { --panel: var(--paper); --panel-line: 1px solid var(--paper-ink); --panel-shadow: 6px 6px 0 #00000030; }
+.slide h2 { font-size: 54px; line-height: 1.15; }
+.slide h2::before { content: "> "; color: var(--hl); }
+.slide .kick::before { content: "$ "; }
+.l-quote .qu-mark { font-family: var(--num); }  /* the pixel font has no curly quote */
+
+.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 6; opacity: .25;
+  background: repeating-linear-gradient(to bottom, transparent 0 3px, #00000055 3px 4px); }

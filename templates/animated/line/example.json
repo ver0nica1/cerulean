@@ -1,0 +1,64 @@
+{
+  "title": "The line",
+  "theme": "papel",
+  "recipe": "line",
+  "data": {
+    "unit": "%",
+    "until": [
+      4,
+      9
+    ],
+    "points": [
+      {
+        "label": "Jan",
+        "value": 12
+      },
+      {
+        "label": "Feb",
+        "value": 15
+      },
+      {
+        "label": "Mar",
+        "value": 14
+      },
+      {
+        "label": "Apr",
+        "value": 19
+      },
+      {
+        "label": "May",
+        "value": 22
+      },
+      {
+        "label": "Jun",
+        "value": 21
+      },
+      {
+        "label": "Jul",
+        "value": 28
+      },
+      {
+        "label": "Aug",
+        "value": 33
+      },
+      {
+        "label": "Sep",
+        "value": 31
+      },
+      {
+        "label": "Oct",
+        "value": 38
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "Until **May**, slow growth.",
+      "note": ""
+    },
+    {
+      "text": "Then it **speeds up**.",
+      "note": ""
+    }
+  ]
+}

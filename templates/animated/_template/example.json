@@ -1,0 +1,10 @@
+{
+  "title": "My recipe",
+  "theme": "fondo",
+  "recipe": "my-recipe",
+  "data": {"items": [{"label": "First"}, {"label": "Second"}, {"label": "Third", "step": 2}]},
+  "steps": [
+    {"text": "Two things are **here**.", "note": ""},
+    {"text": "A **third** one arrives.", "note": ""}
+  ]
+}

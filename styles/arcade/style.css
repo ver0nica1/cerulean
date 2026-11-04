@@ -1,0 +1,38 @@
+/* @style
+{
+ "name": "Arcade",
+ "scheme": "dark",
+ "mood": ["playful", "retro", "neon", "gaming"],
+ "best_for": "video games, game design, internet culture, hackathons, coding for teens, fun tech talks",
+ "avoid_for": "formal reports, health, grief, history, institutional topics",
+ "palette": {"bg": "#120d2b", "ink": "#f4f1ff", "paper": "#f1ecff", "paper_ink": "#1b1238",
+             "accent": "#ff3cac", "accent2": "#2bd2ff", "accent3": "#f9f871", "neutral": "#5a4f86"},
+ "fonts": {"display": "Press Start 2P", "text": "Chakra Petch", "num": "Chakra Petch"},
+ "rhythm": "oscuro",
+ "medium": "bauhaus",
+ "motion": "energico"
+}
+@end */
+
+/* An arcade cabinet: pixel headlines, stepped pixel borders, neon glow and a score-like counter feel. */
+.card { border-radius: 0; background: color-mix(in srgb, var(--bg) 80%, #000);
+  box-shadow: 0 0 0 4px var(--accent2), 8px 8px 0 4px var(--accent); }
+.t-papel .card { background: #ffffff; box-shadow: 0 0 0 4px var(--paper-ink), 8px 8px 0 4px var(--accent); }
+.card li .num { font-weight: 700; }
+.cover h1 { font-size: 64px; line-height: 1.25; color: var(--accent3); text-shadow: 4px 4px 0 var(--accent); }
+.t-papel.cover h1 { color: var(--paper-ink); }
+.cover .kick { color: var(--accent2); }
+.cover .kick::before { content: "▶ "; }
+.lab { border-radius: 0; box-shadow: 0 0 0 3px currentColor; }
+.lab b { font-weight: 700; }
+.end-card { border-radius: 0; box-shadow: 0 0 0 4px var(--accent2), 8px 8px 0 4px var(--accent); }
+.end-card .keep { font-size: 34px; line-height: 1.4; }
+
+.slide { --radius: 0px; --panel: color-mix(in srgb, var(--bg) 80%, #000); --panel-shadow: 0 0 0 4px var(--accent2), 8px 8px 0 4px var(--accent); }
+.t-papel.slide { --panel: #ffffff; --panel-shadow: 0 0 0 4px var(--paper-ink), 8px 8px 0 4px var(--accent); }
+.slide h2 { font-size: 40px; line-height: 1.35; }
+.slide .kick::before { content: "▶ "; }
+.l-section h2 { font-size: 58px; }
+.l-statement .st-tx, .l-quote .qu-tx { font-family: var(--display); font-size: 38px; line-height: 1.5; }
+.l-big-number .bn-val b { font-family: var(--display); font-size: 150px; }
+.l-quote .qu-mark { font-family: var(--text); }

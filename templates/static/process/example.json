@@ -1,0 +1,23 @@
+{
+  "slide": "process",
+  "theme": "fondo",
+  "title": "How a decision is made",
+  "stages": [
+    {
+      "title": "Propose",
+      "text": "Someone writes the proposal."
+    },
+    {
+      "title": "Comment",
+      "text": "Two days to weigh in."
+    },
+    {
+      "title": "Decide",
+      "text": "The owner closes it."
+    },
+    {
+      "title": "Record",
+      "text": "It goes into the document."
+    }
+  ]
+}

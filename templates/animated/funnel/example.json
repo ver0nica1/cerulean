@@ -1,0 +1,35 @@
+{
+  "title": "The funnel",
+  "theme": "fondo",
+  "recipe": "funnel",
+  "data": {
+    "stages": [
+      {
+        "label": "Visits",
+        "value": 1000
+      },
+      {
+        "label": "Sign-ups",
+        "value": 300
+      },
+      {
+        "label": "Purchases",
+        "value": 60
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "A thousand **visits**.",
+      "note": ""
+    },
+    {
+      "text": "Three hundred **sign-ups**.",
+      "note": ""
+    },
+    {
+      "text": "Sixty **purchases**.",
+      "note": ""
+    }
+  ]
+}

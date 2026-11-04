@@ -1,0 +1,37 @@
+{
+  "title": "The chat",
+  "theme": "fondo",
+  "recipe": "chat",
+  "data": {
+    "names": {
+      "a": "Customer",
+      "b": "Assistant"
+    },
+    "messages": [
+      {
+        "from": "a",
+        "text": "Hi, where is my order?"
+      },
+      {
+        "from": "b",
+        "text": "It is on its way and arrives tomorrow afternoon.",
+        "step": 2
+      },
+      {
+        "from": "a",
+        "text": "Thanks!",
+        "step": 2
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "The customer **asks**.",
+      "note": ""
+    },
+    {
+      "text": "The assistant **answers**.",
+      "note": ""
+    }
+  ]
+}

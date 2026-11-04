@@ -1,0 +1,9 @@
+{
+  "slide": "image-text",
+  "theme": "fondo",
+  "title": "The team board",
+  "text": "Every task, with its owner and its status, in one place.",
+  "image": {
+    "placeholder": "Screenshot of the team's task board"
+  }
+}

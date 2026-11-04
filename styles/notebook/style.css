@@ -1,0 +1,48 @@
+/* @style
+{
+ "name": "School notebook",
+ "scheme": "mixed",
+ "mood": ["friendly", "school", "hands-on", "warm"],
+ "best_for": "school and science lessons, kids and teens, how-things-work topics, nature",
+ "avoid_for": "corporate reports, finance, serious or somber topics",
+ "palette": {"bg": "#1f2d36", "ink": "#f1ece2", "paper": "#ece4d6", "paper_ink": "#24303a",
+             "accent": "#3fa9d6", "accent2": "#f2b84b", "accent3": "#7fbf6a", "neutral": "#8a7d70"},
+ "fonts": {"display": "Fredoka", "text": "Nunito", "num": "Fredoka"},
+ "rhythm": "alterno",
+ "medium": "maqueta",
+ "motion": {"smooth": 0.08, "curve": [0.45, 0, 0.25, 1]}
+}
+@end */
+
+/* The class science notebook: the step card is a ruled page with a red margin and ring holes, labels are pieces of
+   tape, and the title gets a hand-drawn wavy underline. */
+.card { border-radius: 4px 24px 24px 4px; padding-left: 82px;
+  background: repeating-linear-gradient(to bottom, transparent 0 51px, color-mix(in srgb, var(--accent) 22%, transparent) 51px 53px),
+    color-mix(in srgb, var(--bg) 84%, var(--ink)); }
+.t-papel .card { background: repeating-linear-gradient(to bottom, transparent 0 51px, color-mix(in srgb, var(--accent) 26%, transparent) 51px 53px), #fffdf6; }
+.card::before { content: ""; position: absolute; left: 58px; top: 0; bottom: 0; width: 2px; background: #e0675a; opacity: .75; }
+.card::after { content: ""; position: absolute; left: 16px; top: 26px; bottom: 26px; width: 22px;
+  background: radial-gradient(circle at 11px 11px, color-mix(in srgb, var(--bg) 40%, #000) 0 7px, transparent 8px) 0 0 / 22px 64px repeat-y; }
+.card li .num { font-weight: 600; }
+.card li.now .num { display: grid; place-items: center; width: 54px; height: 54px; margin-top: -4px; border-radius: 50%;
+  background: var(--hl); color: var(--bg); font-size: 34px; rotate: -6deg; }
+.card li .tx strong { text-decoration: underline wavy color-mix(in srgb, var(--hl) 70%, transparent); text-underline-offset: 6px; }
+
+.cover h1 { font-weight: 600; }
+.cover h1 .w:last-child { text-decoration: underline wavy var(--accent2); text-decoration-thickness: 4px; text-underline-offset: 14px; }
+.cover .kick { letter-spacing: .14em; }
+
+.lab { border-radius: 3px; rotate: -2deg; box-shadow: 0 6px 14px -8px #00000080;
+  background: color-mix(in srgb, var(--accent2) 18%, var(--bg)); }
+.lab.r { rotate: 2deg; }
+.t-papel .lab { background: #fff6d6; }
+
+/* Slides: panels are notebook pages too, with a red margin line; kickers look like a highlighter stroke. */
+.slide { --radius: 4px 22px 22px 4px; }
+.slide .panel { box-shadow: 0 14px 30px -18px #00000099; border-left: 3px solid #e0675a; }
+.t-papel.slide .panel { background: #fffdf6; }
+.slide .kick { align-self: flex-start; padding: 2px 10px; background: color-mix(in srgb, var(--accent2) 30%, transparent); color: inherit; }
+.slide h2 strong, .slide .st-tx strong { text-decoration: underline wavy color-mix(in srgb, var(--hl) 70%, transparent); text-underline-offset: 8px; }
+
+.end-card { rotate: -1deg; }
+.end-card .keep { text-decoration: underline wavy var(--accent3); text-underline-offset: 10px; text-decoration-thickness: 3px; }

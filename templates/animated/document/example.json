@@ -1,0 +1,40 @@
+{
+  "title": "The document",
+  "theme": "papel",
+  "recipe": "document",
+  "data": {
+    "title": "REQUEST",
+    "lines": 11,
+    "highlights": [
+      {
+        "step": 2,
+        "line": 3
+      },
+      {
+        "step": 2,
+        "line": 6
+      }
+    ],
+    "stamps": [
+      {
+        "step": 3,
+        "text": "Approved",
+        "color": "accent2"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "A **request** arrives.",
+      "note": ""
+    },
+    {
+      "text": "The **key details** are checked.",
+      "note": ""
+    },
+    {
+      "text": "It is **approved**.",
+      "note": ""
+    }
+  ]
+}

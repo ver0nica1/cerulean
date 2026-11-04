@@ -1,0 +1,32 @@
+/* @style
+{
+ "name": "Clinical lab",
+ "scheme": "light",
+ "mood": ["scientific", "clean", "precise", "calm"],
+ "best_for": "medicine, biology, chemistry, health, vaccines, research results, science outreach for adults",
+ "avoid_for": "parties, sports, gaming, history, emotional storytelling",
+ "palette": {"bg": "#13202e", "ink": "#eaf1f6", "paper": "#f4f7f9", "paper_ink": "#14263a",
+             "accent": "#1a9e95", "accent2": "#e5674e", "accent3": "#6a5acd", "neutral": "#6d7c8a"},
+ "fonts": {"display": "Instrument Serif", "text": "Instrument Sans", "num": "DM Mono"},
+ "rhythm": "claro",
+ "medium": "plano",
+ "motion": {"smooth": 0.14, "curve": [0.7, 0, 0.2, 1]}
+}
+@end */
+
+/* A clean lab bench: white surfaces, hairline outlines, sample-label pills and a faint measuring grid behind. */
+.card { border-radius: 14px; box-shadow: none; border: 1.5px solid var(--line); }
+.card li .num { font-size: 30px; }
+.cover h1 { font-weight: 400; letter-spacing: -.01em; }
+.cover .kick { display: inline-block; border: 1.5px solid currentColor; border-radius: 999px; padding: 4px 14px; letter-spacing: .12em; }
+.lab { border-radius: 999px; box-shadow: none; border: 1.5px solid var(--line); padding: 6px 18px 8px; }
+.end-card { border-radius: 14px; box-shadow: none; border: 1.5px solid var(--line); }
+.stage::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px;
+  mask: linear-gradient(90deg, transparent 0 46%, #000 75%); }
+
+.slide { --radius: 14px; --panel-shadow: none; --panel-line: 1.5px solid var(--line); }
+.slide h2 { font-weight: 400; font-size: 72px; }
+.l-section h2 { font-size: 112px; }
+.slide .kick { align-self: flex-start; border: 1.5px solid currentColor; border-radius: 999px; padding: 4px 14px; }
+.l-big-number .bn-val b { font-weight: 400; }

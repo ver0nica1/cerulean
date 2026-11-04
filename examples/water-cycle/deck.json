@@ -1,0 +1,167 @@
+{
+ "lang": "es",
+ "kicker": "Ciencias naturales · Exposición",
+ "title": "El ciclo del agua",
+ "subtitle": "El viaje sin fin de cada gota: del mar al cielo y de vuelta.",
+ "design": {
+  "world": {
+   "setting": "el aula de ciencias de una escuela, con la maqueta del ciclo del agua sobre la mesa",
+   "objects": [
+    "tanque de vidrio",
+    "maqueta de montaña",
+    "nube de algodón",
+    "Sol de cartulina",
+    "termómetro",
+    "cuaderno de ciencias",
+    "regadera",
+    "corte del suelo en una pecera"
+   ]
+  },
+  "mood": "maqueta escolar de geografía: madera clara, vidrio con agua teñida y cielo de cartulina",
+  "style": "notebook",
+  "why": {
+   "world": "es una exposición escolar: el ciclo se explica con la maqueta de la clase",
+   "style": "el cuaderno de ciencias de la clase: letra redonda, renglones, margen rojo y anillas"
+  }
+ },
+ "cover": {
+  "draw": "portada"
+ },
+ "scenes": [
+  {
+   "title": "Una gota que no se pierde",
+   "theme": "papel",
+   "steps": [
+    {
+     "text": "El agua de la Tierra es **casi la misma** desde hace millones de años.",
+     "note": ""
+    },
+    {
+     "text": "No se gasta: **cambia de estado** entre hielo, líquido y vapor.",
+     "note": "Estado: la forma física en que está la materia."
+    },
+    {
+     "text": "El **Sol** la sube y la **gravedad** la hace bajar: así se mueve sin parar.",
+     "note": ""
+    }
+   ],
+   "notes": "La idea clave es que el agua no se gasta: se transforma y se mueve. El agua que tomamos hoy pudo estar en un glaciar hace miles de años.",
+   "idea": "transformacion",
+   "form": "un tanque con toda el agua que se reparte en hielo, agua y vapor",
+   "draw": "gota"
+  },
+  {
+   "title": "Cómo sube el agua",
+   "theme": "fondo",
+   "steps": [
+    {
+     "text": "El **Sol** calienta mares, ríos y lagos.",
+     "note": ""
+    },
+    {
+     "text": "El agua líquida se convierte en **vapor invisible** y sube.",
+     "note": "Evaporación: el paso de líquido a gas."
+    },
+    {
+     "text": "Las plantas también sueltan vapor por sus hojas: **transpiración**.",
+     "note": ""
+    }
+   ],
+   "notes": "Cuando el Sol calienta la superficie, parte del agua gana energía y escapa al aire como vapor. Las plantas aportan su parte cuando transpiran.",
+   "idea": "proceso",
+   "form": "el Sol sale sobre el mar y el vapor sube sin parar, también desde los árboles",
+   "draw": "sube"
+  },
+  {
+   "title": "Del vapor a la nube",
+   "theme": "papel",
+   "steps": [
+    {
+     "text": "Al subir, el vapor **se enfría**.",
+     "note": ""
+    },
+    {
+     "text": "Se convierte en **gotas diminutas** que forman las nubes.",
+     "note": "Condensación: el paso de gas a líquido."
+    }
+   ],
+   "notes": "Arriba hace más frío. El vapor se condensa alrededor de partículas de polvo y forma gotas tan pequeñas que flotan: eso es una nube.",
+   "idea": "causa",
+   "form": "un termómetro que baja y, en respuesta, las gotas dispersas se juntan en una nube",
+   "draw": "nube"
+  },
+  {
+   "title": "La lluvia vuelve a bajar",
+   "theme": "fondo",
+   "steps": [
+    {
+     "text": "Las gotas crecen hasta pesar demasiado y **caen como lluvia**.",
+     "note": ""
+    },
+    {
+     "text": "Si hace mucho frío, caen como **nieve o granizo**.",
+     "note": ""
+    },
+    {
+     "text": "El agua corre por la superficie hacia **ríos y mares**.",
+     "note": "Escorrentía: el agua que fluye por encima del suelo."
+    }
+   ],
+   "notes": "Cuando las gotas de la nube se juntan y pesan demasiado, caen. Según la temperatura, llegan como lluvia, nieve o granizo.",
+   "idea": "ciclo",
+   "form": "lluvia que cae sobre una montaña y un río que se dibuja de vuelta al mar",
+   "draw": "lluvia"
+  },
+  {
+   "title": "¿Dónde está el agua dulce?",
+   "theme": "papel",
+   "steps": [
+    {
+     "text": "El **97,5 %** del agua del planeta es salada.",
+     "note": ""
+    },
+    {
+     "text": "Solo el **2,5 %** es agua dulce.",
+     "note": ""
+    },
+    {
+     "text": "Y de esa, casi el **69 %** está congelada en glaciares; ríos y lagos son poco más del **1 %**.",
+     "note": ""
+    }
+   ],
+   "notes": "De toda el agua dulce, casi el 70 % está congelada y un 30 % está bajo tierra. Los ríos y lagos, la que más usamos, son poco más del 1 %.",
+   "idea": "proporcion",
+   "form": "200 puntos de agua; los 5 de agua dulce se separan y se vuelven tres barras",
+   "draw": "dulce"
+  },
+  {
+   "title": "Bajo nuestros pies",
+   "theme": "fondo",
+   "steps": [
+    {
+     "text": "Parte de la lluvia **se infiltra** en el suelo.",
+     "note": ""
+    },
+    {
+     "text": "Baja por los poros hasta llenar los **acuíferos**, depósitos de agua subterránea.",
+     "note": ""
+    },
+    {
+     "text": "Si el suelo está **pavimentado**, el agua no entra y escurre: más inundaciones.",
+     "note": ""
+    }
+   ],
+   "notes": "Lo que pasa con la lluvia depende del suelo. Por eso las ciudades con mucho pavimento se inundan más: el agua no tiene por dónde entrar.",
+   "idea": "estructura",
+   "form": "un corte del suelo por donde la lluvia se filtra hasta llenar el acuífero",
+   "draw": "suelo"
+  }
+ ],
+ "takeaway": "Cada vaso de agua ya hizo este viaje muchas veces.",
+ "summary": [
+  "El Sol evapora el agua y la sube.",
+  "El frío la condensa en nubes.",
+  "La gravedad la devuelve como lluvia.",
+  "Cuidar ríos y acuíferos es cuidar el ciclo."
+ ]
+}

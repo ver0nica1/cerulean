@@ -1,0 +1,38 @@
+{
+  "title": "The bars",
+  "theme": "fondo",
+  "recipe": "bars",
+  "data": {
+    "unit": "h",
+    "highlight": 2,
+    "items": [
+      {
+        "label": "Meetings",
+        "value": 9
+      },
+      {
+        "label": "Email",
+        "value": 6
+      },
+      {
+        "label": "Deep work",
+        "value": 18,
+        "step": 2
+      },
+      {
+        "label": "Breaks",
+        "value": 4
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "The hours spent **coordinating**.",
+      "note": ""
+    },
+    {
+      "text": "And the ones left to **work**.",
+      "note": ""
+    }
+  ]
+}

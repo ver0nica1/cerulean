@@ -1,0 +1,19 @@
+{
+  "slide": "stats",
+  "theme": "fondo",
+  "title": "The rhythm of the week",
+  "items": [
+    {
+      "value": "1",
+      "label": "planning on Monday"
+    },
+    {
+      "value": "5",
+      "label": "short check-ins"
+    },
+    {
+      "value": "1",
+      "label": "retrospective on Friday"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "The donut",
+  "theme": "papel",
+  "recipe": "donut",
+  "data": {
+    "center": [
+      "",
+      "100 %"
+    ],
+    "parts": [
+      {
+        "label": "Housing",
+        "value": 40
+      },
+      {
+        "label": "Food",
+        "value": 25
+      },
+      {
+        "label": "Transport",
+        "value": 15,
+        "step": 2
+      },
+      {
+        "label": "Other",
+        "value": 20,
+        "step": 2
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "Housing and food are **two thirds**.",
+      "note": ""
+    },
+    {
+      "text": "The rest is shared out.",
+      "note": ""
+    }
+  ]
+}

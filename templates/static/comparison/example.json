@@ -1,0 +1,21 @@
+{
+  "slide": "comparison",
+  "theme": "papel",
+  "title": "What changes",
+  "left": {
+    "title": "Before",
+    "items": [
+      "Decisions in hallways",
+      "Tasks without an owner",
+      "Long meetings"
+    ]
+  },
+  "right": {
+    "title": "Now",
+    "items": [
+      "Written decisions",
+      "One owner per task",
+      "15-minute check-ins"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "title": "The stack",
+  "theme": "papel",
+  "recipe": "stack",
+  "data": {
+    "layers": [
+      {
+        "label": "Server"
+      },
+      {
+        "label": "Database"
+      },
+      {
+        "label": "API"
+      },
+      {
+        "label": "Application"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "At the bottom, the **server**.",
+      "note": ""
+    },
+    {
+      "text": "On top, the **data**.",
+      "note": ""
+    },
+    {
+      "text": "Then the **API**.",
+      "note": ""
+    },
+    {
+      "text": "At the top, the **app**.",
+      "note": ""
+    }
+  ]
+}

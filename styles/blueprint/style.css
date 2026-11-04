@@ -1,0 +1,34 @@
+/* @style
+{
+ "name": "Engineering blueprint",
+ "scheme": "dark",
+ "mood": ["technical", "constructive", "methodical", "engineering"],
+ "best_for": "engineering, architecture, how machines and buildings work, product design, infrastructure, physics",
+ "avoid_for": "emotional topics, fashion, children, history before the industrial age",
+ "palette": {"bg": "#0f3a66", "ink": "#eaf2ff", "paper": "#eef3f8", "paper_ink": "#10263f",
+             "accent": "#ffd166", "accent2": "#7fdbff", "accent3": "#ff5c7a", "neutral": "#5d7a99"},
+ "fonts": {"display": "Space Grotesk", "text": "IBM Plex Sans", "num": "IBM Plex Mono"},
+ "rhythm": "oscuro",
+ "medium": "tecnico",
+ "motion": {"smooth": 0.13, "curve": [0.65, 0, 0.35, 1]}
+}
+@end */
+
+/* A blueprint sheet: grid lines on blue, white technical strokes, dashed frames with corner ticks, mono annotations. */
+.stage::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1px) 0 0 / 32px 32px; }
+.card { border-radius: 0; box-shadow: none; background: color-mix(in srgb, var(--bg) 88%, #000); border: 1.5px dashed color-mix(in srgb, var(--ink) 60%, transparent); }
+.t-papel .card { background: #ffffff; border-color: var(--paper-ink); }
+.card li .num { font-family: var(--num); }
+.cover h1 { letter-spacing: -.02em; }
+.cover .kick { font-family: var(--num); letter-spacing: .08em; }
+.cover .kick::before { content: "DWG · "; }
+.lab { border-radius: 0; box-shadow: none; border: 1.5px dashed currentColor; background: var(--bg); }
+.end-card { border-radius: 0; box-shadow: none; border: 1.5px dashed var(--line); }
+
+.slide { --radius: 0px; --panel: color-mix(in srgb, var(--bg) 88%, #000); --panel-shadow: none; --panel-line: 1.5px dashed color-mix(in srgb, var(--ink) 55%, transparent); }
+.t-papel.slide { --panel: #ffffff; --panel-line: 1.5px dashed var(--paper-ink); }
+.slide .kick { font-family: var(--num); letter-spacing: .08em; }
+.slide .kick::before { content: "§ "; }
+.slide h2 { letter-spacing: -.02em; }

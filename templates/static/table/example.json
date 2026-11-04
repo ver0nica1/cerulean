@@ -1,0 +1,28 @@
+{
+  "slide": "table",
+  "theme": "papel",
+  "title": "Who does what",
+  "columns": [
+    "Role",
+    "Owns",
+    "Reviews"
+  ],
+  "rows": [
+    [
+      "Coordination",
+      "Agenda and priorities",
+      "The whole team"
+    ],
+    [
+      "Development",
+      "Technical tasks",
+      "Coordination"
+    ],
+    [
+      "Design",
+      "Screens and copy",
+      "Development"
+    ]
+  ],
+  "highlight": 0
+}

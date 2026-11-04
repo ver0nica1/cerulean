@@ -1,0 +1,32 @@
+{
+  "title": "The balance",
+  "theme": "fondo",
+  "recipe": "balance",
+  "data": {
+    "unit": "kg",
+    "left": {
+      "label": "Plastic",
+      "value": [
+        3,
+        3
+      ]
+    },
+    "right": {
+      "label": "Glass",
+      "value": [
+        1,
+        6
+      ]
+    }
+  },
+  "steps": [
+    {
+      "text": "At first, **plastic** weighs more.",
+      "note": ""
+    },
+    {
+      "text": "Then more **glass** arrives.",
+      "note": ""
+    }
+  ]
+}

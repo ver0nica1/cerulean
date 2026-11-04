@@ -1,0 +1,33 @@
+{
+  "title": "The conveyor",
+  "theme": "papel",
+  "recipe": "conveyor",
+  "data": {
+    "item": "ORDER",
+    "stations": [
+      {
+        "label": "Receive"
+      },
+      {
+        "label": "Pack"
+      },
+      {
+        "label": "Ship"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "text": "The order is **received**.",
+      "note": ""
+    },
+    {
+      "text": "It is **packed**.",
+      "note": ""
+    },
+    {
+      "text": "And **shipped**.",
+      "note": ""
+    }
+  ]
+}
