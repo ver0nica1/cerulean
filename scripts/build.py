@@ -372,7 +372,12 @@ def imagen(im, i: int, pasos: int, base: Path) -> dict:
                            "color": lb.get("color") if lb.get("color") in LABEL_COLORS else "accent"})
     out = {"frame": im.get("frame") if im.get("frame") in FRAMES else "browser",
            "placeholder": str(im.get("placeholder", ""))[:160], "url": str(im.get("url", ""))[:60],
-           "src": "", "data": "", "hint": "", "zooms": zooms, "marks": marks, "labels": labels}
+           "src": "", "data": "", "hint": "", "zooms": zooms, "marks": marks, "labels": labels,
+           # How a slide shows it: "fit" (whole, the box takes its shape) or "fill" (fills the box, cropped around
+           # focus, the point that stays in view, in % of the image).
+           "fit": "fill" if im.get("fit") == "fill" else "fit",
+           "focus": {k: _n((im.get("focus") or {}).get(k) if isinstance(im.get("focus"), dict) else None, 0, 100, 50)
+                     for k in ("x", "y")}}
     # El archivo: el que diga src (relativo al JSON) o, si no hay, imagenes/escena-<n>.<ext> si existe.
     candidatos = [base / im["src"]] if str(im.get("src", "")).strip() else \
         [base / "imagenes" / f"escena-{i}{e}" for e in EXTS]

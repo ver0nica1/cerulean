@@ -167,7 +167,6 @@ def gallery(only: str | None, style: str) -> tuple[dict, list[str]]:
                 continue
             scene.setdefault("title", slug)
             scene["theme"] = theme(len(scenes))  # follow the style's rhythm, whatever the example says
-            scene["notes"] = kind.label(slug, EXAMPLE)
             scenes.append(scene)
             shown.add(slug)
     for missing in sorted((wanted or set()) - shown):

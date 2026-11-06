@@ -107,8 +107,10 @@ When a scene would be better explained with a real image it doesn't have (a scre
 1. It leaves a **placeholder** in the scene: a frame describing what goes there.
 2. When it finishes, it gives you the **list of pending images**: which scene, what it should show and the file name to save it as (`presentaciones/imagenes/escena-3.png`).
 3. You add it in one of these ways:
+   - **Click the placeholder**: your files open, you pick the image and it is placed there. You can also drop it on
+     that space. No need to enter edit mode first: once it is placed, edit mode opens so you can keep it (**Save** in
+     the live preview, **Download copy** in a standalone HTML).
    - Save it with that name: it shows up on its own.
-   - Drag it onto the scene in edit mode.
    - Give it to Claude, who places it and adjusts the zooms and labels.
 
 ## Presenting
@@ -129,9 +131,9 @@ To jump straight to a scene, add `#scene.step` to the end of the address: `#5.3`
 
 Press **E** (or the **Edit** button):
 
-- **Texts:** click any text (steps, notes, labels, title, summary) and change it. To highlight a word in color, wrap it in `**double asterisks**`.
-- **Images:** drag an image onto a scene, or use the **Image…** button. If the scene had a model or a placeholder, the image takes its place.
-- **Position and size:** each scene shows handles. With **✥** you drag the step card or the illustration somewhere else; with **⤡** (at the corner of the illustration) you make it bigger or smaller. **Reset layout** puts the current scene back the way it was.
+- **Texts:** click any text (steps, notes, labels, title, summary) and change it. To edit the speaker notes, open them first with **Notes** (or N). To highlight a word in color, wrap it in `**double asterisks**`.
+- **Images:** drag an image onto a scene, click an empty image space, or use the **Image…** button. If the scene had a model or a placeholder, the image takes its place. To change an image that is already there, click it. This works the same on explainer scenes and on slides. On a slide, the image is shown whole and its box takes its shape; the **Fill** button makes it fill the box instead (it gets cropped), and then you drag the image to choose which part shows. **Fit** goes back to the whole image.
+- **Position and size:** each scene shows handles. With **✥** you drag the step card or the illustration somewhere else; with **⤡** (at the corner of the illustration) you make it bigger or smaller. On a slide with an image, the image has the same handles. **Reset layout** puts the current scene back the way it was.
 - **Saving** depends on how you opened the presentation:
   - **From the live preview** (`preview.py`), it writes the changes into the JSON and the images into the `imagenes/` folder. The first time it keeps a `.json.bak` copy in case you want to go back.
   - **From a standalone HTML file**, the button says **"Download copy"** and gives you a new HTML with the changes inside, ready to send.

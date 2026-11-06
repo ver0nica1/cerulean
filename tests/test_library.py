@@ -105,6 +105,28 @@ class TemplatePreviewTest(unittest.TestCase):
         self.assertEqual(self.args.entrada.read_text(encoding="utf-8"), good)
 
 
+class ImageFitTest(unittest.TestCase):
+    """How an image fills its box: build.imagen() keeps a valid fit and focus and replaces anything else."""
+
+    def image(self, **fields):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = build_module.imagen({"placeholder": "x", **fields}, 1, 1, Path(tmp))
+        build_module.avisos.clear()  # the missing file is expected here
+        return out
+
+    def test_defaults_to_the_whole_image_centered(self):
+        out = self.image()
+        self.assertEqual((out["fit"], out["focus"]), ("fit", {"x": 50, "y": 50}))
+
+    def test_keeps_fill_and_clamps_the_focus(self):
+        out = self.image(fit="fill", focus={"x": 20, "y": 130})
+        self.assertEqual((out["fit"], out["focus"]), ("fill", {"x": 20, "y": 100}))
+
+    def test_replaces_invalid_values(self):
+        out = self.image(fit="zoom", focus="center")
+        self.assertEqual((out["fit"], out["focus"]), ("fit", {"x": 50, "y": 50}))
+
+
 class BuildTest(unittest.TestCase):
     def test_gallery_builds_in_every_style(self):
         expected = build_module.IMAGEN_PENDIENTE  # image-text's example keeps a placeholder on purpose

@@ -253,6 +253,12 @@ body.grid .scene.cur { outline: 3px solid var(--accent2); outline-offset: 3px; }
 .ph svg { width: 72px; height: 72px; color: var(--hl); }
 .ph b { font: 500 30px/1.2 var(--display); color: var(--ink); }
 .ph span { font-size: 19px; line-height: 1.4; }
+/* An empty image space can be clicked (or have a file dropped on it) to place the image. */
+.view.empty, .slide .pic.empty { cursor: pointer; transition: border-color .2s, background-color .2s; }
+.view.empty:hover, .slide .pic.empty:hover, .drop .view.empty, .drop .pic.empty {
+  border-color: var(--hl); background-color: color-mix(in srgb, var(--hl) 8%, transparent); }
+.ph .ph-act, .slide .pic.empty .ph-act { color: var(--hl); font-weight: 600; }
+@media print { .ph-act { display: none; } }
 
 /* =================================================================================================
    Modo edición
@@ -261,6 +267,8 @@ body.grid .scene.cur { outline: 3px solid var(--accent2); outline-offset: 3px; }
   padding: 10px 16px; background: #1d1712; color: #f2efe6; border-bottom: 2px solid var(--accent2); font-size: 14px; }
 .editbar[hidden] { display: none; }
 .editbar .msg { flex: 1; color: #f2efe6cc; }
+/* The bar must stay one row (the slide sits 52px below it): on narrow windows the help text gives way to the buttons. */
+@media (max-width: 1150px) { .editbar .msg { display: none; } .editbar .state { flex: 1; } }
 .editbar .state { color: var(--accent2); font-weight: 500; white-space: nowrap; }
 .editbar button { background: transparent; color: inherit; border: 1.5px solid #ffffff44; border-radius: 999px; padding: 6px 14px; font: 500 14px var(--text); }
 .editbar button.primary { background: var(--accent2); border-color: var(--accent2); color: var(--on-accent); }
@@ -351,6 +359,8 @@ body.grid .stage::after { display: none; }
   background: var(--accent2); color: var(--on-accent); font: 600 18px/34px var(--text); text-align: center; cursor: grab;
   box-shadow: 0 4px 12px -4px #00000099; touch-action: none; }
 .grip.size { cursor: nwse-resize; }
+.grip.fitmode { width: auto; padding: 0 14px; border-radius: 17px; font-size: 14px; cursor: pointer; }
+body.editing .slide .pic.fill img { cursor: grab; }
 body.editing .grip { display: block; }
 body.editing .scene .card, body.editing .scene .set, body.editing .cover-txt { outline: 2px dashed color-mix(in srgb, var(--accent2) 70%, transparent); outline-offset: 6px; }
 body.dragging, body.dragging * { cursor: grabbing !important; user-select: none; }
@@ -381,8 +391,15 @@ body.snap .slide .rv { opacity: 1; translate: none; }
 /* Imagen dentro de una diapositiva (maqueta image-text): la foto o un espacio reservado que dice qué va ahí. */
 .slide .pic { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--panel); }
 .slide .pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.slide .pic.empty { display: grid; place-content: center; gap: 10px; padding: 30px; text-align: center; color: var(--mute);
-  border: 3px dashed var(--line); background: none; font: 500 22px/1.35 var(--text); }
+/* Moved and resized from edit mode (✥ / ⤡). It uses transform, so it adds to the step reveal, which uses translate. */
+.slide .pic { transform: translate(var(--lx, 0px), var(--ly, 0px)) scale(var(--ls, 1)); }
+/* In edit mode a placed image can be clicked to replace it. */
+body.editing .view, body.editing .slide .pic { cursor: pointer; }
+.slide .pic.empty { display: grid; place-content: center; justify-items: center; gap: 12px; padding: 30px; text-align: center;
+  color: var(--mute); border: 3px dashed color-mix(in srgb, var(--ink) 30%, transparent); background: none; font: 500 22px/1.35 var(--text); }
+.slide .pic.empty::before { content: "+"; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%;
+  margin-bottom: 6px; font: 300 60px/1 var(--text); color: var(--hl); background: color-mix(in srgb, var(--hl) 14%, transparent); }
+.slide .pic.empty b { font: 500 32px/1.2 var(--display); color: var(--ink); }
 /* Portada sin ilustración: el título ocupa el ancho. */
 .cover.solo .cover-txt { left: 110px; width: 1300px; }
 .cover.solo .cover-txt h1 { font-size: 112px; }

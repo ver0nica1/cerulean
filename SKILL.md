@@ -70,7 +70,7 @@ Formats can be mixed: an explainer can use a `quote` or `big-number` slide as a 
 7. **Deliver:** the HTML path and how to use it: → / space next, ← back, F full screen, N notes, G overview,
    E edit mode (texts, images, and ✥ / ⤡ to move or resize the card and the illustration; "Download copy" saves an
    HTML with the changes), PDF button (one scene per page). List pending images: scene, what it should show, and the
-   file name `presentaciones/imagenes/escena-<n>.png`.
+   file name `presentaciones/imagenes/escena-<n>.png`; say they can also click the empty space to pick the file.
 
 ## Rules
 

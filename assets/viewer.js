@@ -128,7 +128,8 @@
       // Espacio reservado: dice qué imagen va aquí y cómo ponerla.
       view.classList.add("empty");
       view.append(h("div", { class: "ph" }, ICON(), h("b", { text: im.placeholder || t("Imagen pendiente", "Image pending") }),
-        h("span", { text: [im.hint && t(`Guárdala como ${im.hint}`, `Save it as ${im.hint}`), t("o arrástrala aquí en modo edición (E)", "or drop it here in edit mode (E)")].filter(Boolean).join(" · ") })));
+        h("span", { class: "ph-act", text: t("Haz clic para elegir una imagen, o arrástrala aquí", "Click to choose an image, or drop it here") }),
+        im.hint ? h("span", { text: t(`o guárdala como ${im.hint}`, `or save it as ${im.hint}`) }) : null));
     }
     size();
     return { kind: "img", fig, im, view, canvas, marks, pins };
@@ -271,7 +272,9 @@
   /* ---- Dónde va cada cosa: la tarjeta y la ilustración se pueden mover, y la ilustración agrandar o achicar, desde
      el modo edición. Se guarda en la escena como layout: {card: {x, y}, visual: {x, y, s}} (px de la diapositiva). */
   const layoutOf = (x) => (x.path ? getAt(x.path) : null);
-  const partsOf = (x) => (x.piece.kind === "slide" ? {} : { card: x.el.querySelector(".card, .cover-txt"), visual: x.piece.fig });
+  // On a slide, the movable part is its picture (the image-text layout), if it has one.
+  const partsOf = (x) => (x.piece.kind === "slide" ? { visual: x.el.querySelector(".pic"), inside: true }
+    : { card: x.el.querySelector(".card, .cover-txt"), visual: x.piece.fig });
   function applyLayout(x) {
     const L = (layoutOf(x) && layoutOf(x).layout) || {}, P = partsOf(x);
     const c = L.card || {}, v = L.visual || {};
@@ -320,7 +323,58 @@
     if (!x.path) return;  // el cierre repite la ilustración de la portada
     const P = partsOf(x);
     if (P.card) P.card.append(grip(x, "card", "move", P.card.classList.contains("card") ? "left:10px;top:10px" : "left:-46px;top:0"));
-    if (P.visual) P.visual.append(grip(x, "visual", "move", "left:-14px;top:-14px"), grip(x, "visual", "size", "right:-14px;bottom:-14px"));
+    // A slide's picture clips what overflows it, so its handles sit just inside the corners.
+    const at = P.inside ? ["left:12px;top:12px", "right:12px;bottom:12px"] : ["left:-14px;top:-14px", "right:-14px;bottom:-14px"];
+    if (P.visual) P.visual.append(grip(x, "visual", "move", at[0]), grip(x, "visual", "size", at[1]));
+    if (P.inside && P.visual && P.visual.querySelector("img")) framing(x, P.visual);
+  }
+  /* A slide's picture: "fit" shows the whole image (the box takes its shape); "fill" fills the box and crops it.
+     In edit mode a button switches between them and, in fill mode, dragging the image picks which part stays in view
+     (image.focus, in %). A drag must not count as the click that replaces the image. */
+  let justDragged = false;
+  function framing(x, pic) {
+    const image = () => getAt(x.path).image;
+    const fill = image().fit === "fill";
+    const btn = h("button", { type: "button", class: "grip fitmode", style: "right:12px;top:12px",
+      title: fill ? t("Mostrar la imagen entera", "Show the whole image") : t("Llenar el recuadro (recorta la imagen)", "Fill the box (crops the image)"),
+      text: fill ? t("Ajustar", "Fit") : t("Rellenar", "Fill") });
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      image().fit = fill ? "fit" : "fill";
+      dirty = true;
+      rebuild(x.i);
+      status(fill ? t("Imagen entera", "Whole image") : t("Arrastra la imagen para elegir qué parte se ve", "Drag the image to choose what shows"));
+    });
+    pic.append(btn);
+    if (!fill) return;
+    const img = pic.querySelector("img");
+    img.addEventListener("pointerdown", (e) => {
+      if (!editing) return;
+      e.preventDefault();
+      const r = pic.getBoundingClientRect(), f = { x: 50, y: 50, ...image().focus }, start = { px: e.clientX, py: e.clientY, ...f };
+      let moved = false;
+      const move = (ev) => {
+        const dx = ev.clientX - start.px, dy = ev.clientY - start.py;
+        if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+        // Dragging the image right shows more of its left side: the focus point moves the other way.
+        f.x = Math.round(Math.max(0, Math.min(100, start.x - (dx / r.width) * 100)));
+        f.y = Math.round(Math.max(0, Math.min(100, start.y - (dy / r.height) * 100)));
+        pic.style.setProperty("--fx", `${f.x}%`);
+        pic.style.setProperty("--fy", `${f.y}%`);
+      };
+      const up = () => {
+        removeEventListener("pointermove", move);
+        if (!moved) return;
+        justDragged = true;
+        setTimeout(() => { justDragged = false; }, 400);  // in case no click follows the drag
+        image().focus = { x: f.x, y: f.y };
+        dirty = true;
+        status();
+      };
+      addEventListener("pointermove", move);
+      addEventListener("pointerup", up, { once: true });
+      addEventListener("pointercancel", up, { once: true });
+    });
   }
   // Si los pasos no caben entre la cabecera y el borde de abajo, la lista se encoge lo justo (--fit).
   function fitCard(x) {
@@ -355,7 +409,7 @@
     old.el.replaceWith(x.el);
     decorate(x);
     if (si === curScene) { x.el.classList.add("cur"); apply(x, POS[at][1], { fresh: true }); }
-    if (editing) dropzone(x);
+    dropzone(x);
   }
 
   // Las posiciones: cada paso de cada escena, en orden.
@@ -822,8 +876,8 @@
 
   // ---- Modo edición -----------------------------------------------------------------------------
   const bar = h("div", { class: "editbar", hidden: "" },
-    h("span", { class: "msg", text: t("Modo edición: haz clic en un texto para cambiarlo (**así** lo resalta). Con ✥ mueves la tarjeta o la ilustración y con ⤡ cambias su tamaño. Arrastra una imagen sobre una escena para ponerla.",
-      "Edit mode: click a text to change it (**like this** highlights it). Use ✥ to move the card or the illustration and ⤡ to resize it. Drop an image on a scene to place it.") }),
+    h("span", { class: "msg", text: t("Modo edición: haz clic en un texto para cambiarlo (**así** lo resalta). Con ✥ mueves la tarjeta o la ilustración y con ⤡ cambias su tamaño. Arrastra una imagen sobre una escena (o haz clic en un espacio vacío) para ponerla.",
+      "Use ✥ to move the card or the illustration and ⤡ to resize it.") }),
     h("button", { type: "button", id: "e-reset", title: t("Devuelve la tarjeta y la ilustración de esta escena a su sitio", "Put this scene's card and illustration back"), text: t("Recolocar", "Reset layout") }),
     h("span", { class: "state", id: "e-state" }),
     h("button", { type: "button", id: "e-img", text: t("Imagen…", "Image…") }),
@@ -844,8 +898,7 @@
       // El título de la portada se edita entero, no palabra por palabra.
       const h1 = scenes[0].el.querySelector("h1");
       if (h1.querySelector(".w")) h1.textContent = K.title;
-      scenes.forEach(dropzone);
-      toggleNotes(true);
+      scenes.forEach(dropzone);  // Notes stay as they were: they open only from their own button (or the N key)
     }
     EDITABLES.forEach((el) => (on ? el.setAttribute("contenteditable", "plaintext-only") : el.removeAttribute("contenteditable")));
     status();
@@ -853,7 +906,9 @@
   $("b-edit").onclick = () => toggleEdit();
   $("e-exit").onclick = () => toggleEdit(false);
   $("e-save").onclick = () => save();
-  $("e-img").onclick = () => picker.click();
+  let pickFor = null;  // the scene the file picker will place its image in
+  const choose = (si) => { pickFor = si; picker.click(); };
+  $("e-img").onclick = () => choose(curScene);
   $("e-reset").onclick = () => {
     const x = scenes[curScene], target = x && layoutOf(x);
     if (!target || !target.layout) return;
@@ -863,21 +918,43 @@
     dirty = true;
     status(t("Escena recolocada", "Layout reset"));
   };
-  picker.addEventListener("change", () => { if (picker.files[0]) placeImage(curScene, picker.files[0]); picker.value = ""; });
+  picker.addEventListener("change", () => {
+    if (picker.files[0]) placeImage(pickFor ?? curScene, picker.files[0]);
+    picker.value = "";
+    pickFor = null;
+  });
 
+  // An empty image space works without edit mode: a click opens the file picker for its scene, and a file dropped on
+  // it is placed there. (In edit mode an image can be dropped anywhere on the scene.)
+  // In edit mode, a click on an image that is already placed replaces it (but not on its labels, pins or handles).
+  const EMPTY = ".view.empty, .pic.empty", PLACED = ".view, .slide .pic";
+  document.addEventListener("click", (e) => {
+    if (justDragged) { justDragged = false; e.stopPropagation(); return; }  // the end of a reframing drag
+    if (!e.target.closest || document.body.classList.contains("grid")) return;
+    const ph = e.target.closest(EMPTY) ||
+      (editing && !e.target.closest("[data-edit], .grip, .pin, button") && e.target.closest(PLACED));
+    if (!ph) return;
+    const si = scenes.findIndex((x) => x.el.contains(ph));
+    if (si < 0 || !scenes[si].path) return;
+    e.preventDefault();
+    e.stopPropagation();  // the click must not also move to the next step
+    choose(si);
+  }, true);
   function dropzone(x) {
     if (x.el._dz || x.path === null) return;  // la escena final repite la portada: no recibe imagen propia
     x.el._dz = true;
-    x.el.addEventListener("dragover", (e) => { if (!editing) return; e.preventDefault(); x.el.classList.add("drop"); });
+    const accepts = (e) => editing || (e.target.closest && e.target.closest(EMPTY));
+    x.el.addEventListener("dragover", (e) => { if (!accepts(e)) return; e.preventDefault(); x.el.classList.add("drop"); });
     x.el.addEventListener("dragleave", () => x.el.classList.remove("drop"));
     x.el.addEventListener("drop", (e) => {
       x.el.classList.remove("drop");
-      if (!editing) return;
+      if (!accepts(e)) return;
       e.preventDefault();
       const f = [...e.dataTransfer.files].find((file) => file.type.startsWith("image/"));
       if (f) placeImage(scenes.indexOf(x), f);
     });
   }
+  scenes.forEach(dropzone);
   // La imagen se reduce en el navegador si es muy grande, y se guarda dentro de K como data URI.
   function placeImage(si, file) {
     const x = scenes[si];
@@ -900,11 +977,14 @@
         target.image = {
           frame: prev ? prev.frame : tall ? "phone" : "browser", placeholder: prev ? prev.placeholder : file.name, url: prev ? prev.url : "",
           zooms: prev ? prev.zooms : [], marks: prev ? prev.marks : [], labels: prev ? prev.labels : [],
+          fit: prev && prev.fit === "fill" ? "fill" : "fit", focus: { x: 50, y: 50 },  // a new image starts centered
           src: "", hint: "", data, nuevo: true,
         };
         dirty = true;
         rebuild(si);
-        status(t("Imagen colocada", "Image placed"));
+        // Placed from a click outside edit mode: open edit mode, so the Save (or Download copy) button is at hand.
+        if (!editing) toggleEdit(true);
+        status(t("Imagen colocada: guarda para conservarla", "Image placed: save to keep it"));
       };
       img.src = reader.result;
     };

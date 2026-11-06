@@ -107,8 +107,10 @@ Cuando una escena se explicaría mejor con una imagen real que no tiene (una pan
 1. Deja un **espacio reservado** en la escena: un marco con la descripción de lo que va ahí.
 2. Al terminar, te da la **lista de imágenes pendientes**: qué escena, qué debe mostrar y con qué nombre guardarla (`presentaciones/imagenes/escena-3.png`).
 3. Tú la pones de una de estas formas:
+   - **Haces clic en el espacio reservado**: se abren tus archivos, eliges la imagen y queda colocada ahí. También
+     puedes arrastrarla sobre ese espacio. Funciona sin entrar antes al modo edición: al colocarla, se abre solo para
+     que la guardes (**Guardar** en la vista previa, **Descargar copia** en un HTML suelto).
    - La guardas con ese nombre: aparece sola.
-   - La arrastras sobre la escena en modo edición.
    - Se la pasas a Claude, que la coloca y ajusta los acercamientos y rótulos.
 
 ## Presentar
@@ -129,9 +131,9 @@ Para ir directo a una escena, pon `#escena.paso` al final de la dirección: `#5.
 
 Pulsa **E** (o el botón **Editar**):
 
-- **Textos:** haz clic en cualquier texto (pasos, notas, rótulos, título, resumen) y cámbialo. Para resaltar una palabra en color, escríbela entre `**dos asteriscos**`.
-- **Imágenes:** arrastra una imagen sobre una escena, o usa el botón **Imagen…**. Si la escena tenía una maqueta o un espacio reservado, la imagen ocupa su lugar.
-- **Posición y tamaño:** cada escena muestra unas asas. Con **✥** arrastras la tarjeta de pasos o la ilustración a otro sitio; con **⤡** (en la esquina de la ilustración) la agrandas o la achicas. **Recolocar** devuelve la escena actual a como estaba.
+- **Textos:** haz clic en cualquier texto (pasos, notas, rótulos, título, resumen) y cámbialo. Para editar las notas del orador, ábrelas primero con **Notas** (o N). Para resaltar una palabra en color, escríbela entre `**dos asteriscos**`.
+- **Imágenes:** arrastra una imagen sobre una escena, haz clic en un espacio vacío o usa el botón **Imagen…**. Si la escena tenía una maqueta o un espacio reservado, la imagen ocupa su lugar. Para cambiar una imagen que ya está, haz clic sobre ella. Funciona igual en las escenas del explicador y en las diapositivas. En una diapositiva la imagen se ve entera y su recuadro toma la forma de la imagen; el botón **Rellenar** hace que llene el recuadro (se recorta), y entonces arrastras la imagen para elegir qué parte se ve. **Ajustar** vuelve a mostrarla entera.
+- **Posición y tamaño:** cada escena muestra unas asas. Con **✥** arrastras la tarjeta de pasos o la ilustración a otro sitio; con **⤡** (en la esquina de la ilustración) la agrandas o la achicas. En una diapositiva con imagen, la imagen tiene las mismas asas. **Recolocar** devuelve la escena actual a como estaba.
 - **Guardar** depende de cómo abriste la presentación:
   - **Desde la vista previa** (`preview.py`), escribe los cambios en el JSON y las imágenes en la carpeta `imagenes/`. La primera vez deja una copia `.json.bak` por si quieres volver atrás.
   - **Desde el archivo HTML suelto**, el botón dice **"Descargar copia"** y te da un HTML nuevo con los cambios dentro, listo para enviar.
