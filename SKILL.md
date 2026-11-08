@@ -28,15 +28,16 @@ Formats can be mixed: an explainer can use a `quote` or `big-number` slide as a 
    Default length: slides 8–14, explainer 5–9 scenes.
    **Language:** write the presentation in the language the person asks in, unless they ask for another one; if you
    can't tell, English. Put it in `"lang"` (`"es"`, `"en"`, `"pt-BR"`…).
-2. **Read only what you need:** `catalog.md` (styles, layouts and recipes, one line each, with their fields). That is
+2. **Read only what you need** from `catalog/` (one line per piece, with its fields): always `styles.md`; for slides,
+   `slides.md`; for an explainer, `recipes.md`, plus `slides.md` only if it will have a slide as a pause. That is
    enough for slides. An explainer also has one signature scene (step 5): for it, read the kit table and the timing
    section of `references/scenes.md`; `examples/water-cycle/deck.js` has complete hand-made scenes if you need a model.
-3. **Pick a style** from `catalog.md` that fits the topic and audience (`for` / `avoid`): `"design": {"style": "<slug>"}`.
+3. **Pick a style** from `catalog/styles.md` that fits the topic and audience (`for` / `avoid`): `"design": {"style": "<slug>"}`.
    That gives the palette, fonts, rhythm and skin: don't write them. Only when no style fits, or the person asks for
    something unique, design a custom look: read `references/direction.md` and write `presentaciones/<topic>.css`.
 4. **Write the script** in `presentaciones/<topic>.json`. Alternate `"theme": "fondo"` / `"papel"` following the
    style's rhythm. **Slides:** one object per slide with `"slide": "<layout>"` and that layout's fields from
-   `catalog.md`; never the same layout twice in a row; mark 1–3 key words per slide with `**…**`:
+   `catalog/slides.md`; never the same layout twice in a row; mark 1–3 key words per slide with `**…**`:
    ```json
    {"lang": "es", "format": "slides", "title": "…", "subtitle": "…", "kicker": "…", "design": {"style": "editorial"},
     "scenes": [{"slide": "section", "theme": "papel", "number": 1, "title": "…", "notes": "what the speaker says"},
@@ -44,7 +45,7 @@ Formats can be mixed: an explainer can use a `quote` or `big-number` slide as a 
     "takeaway": "…", "summary": ["…", "…"]}
    ```
    **Explainer:** each scene has 2–4 steps (one or two short sentences each, 1–4 `**key words**`, building on each
-   other) and one visual: a **recipe** from `catalog.md` with its `data` (values that change go as one per step) for
+   other) and one visual: a **recipe** from `catalog/recipes.md` with its `data` (values that change go as one per step) for
    every scene except the signature one; never the same recipe twice in a row. A `"slide"` can sit between scenes.
    ```json
    {"title": "…", "theme": "fondo", "recipe": "board",

@@ -1,7 +1,7 @@
 # Static templates (layouts)
 
 Ready-made slide layouts for the **slides** format: their content does not animate, it only enters step by step. A
-slide names one with `"slide": "<slug>"` and fills its fields (listed in `catalog.md`). Only the layouts a
+slide names one with `"slide": "<slug>"` and fills its fields (listed in `catalog/slides.md`). Only the layouts a
 presentation uses are bundled into its HTML. For scenes that move, see `../animated/`.
 
 One folder per layout:

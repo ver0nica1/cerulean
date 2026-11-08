@@ -1,7 +1,7 @@
 # Animated templates (recipes)
 
 Ready-made animated scenes for the **explainer** format (for slides that don't animate, see `../static/`). A scene names one with `"recipe": "<slug>"` and passes its
-data in `"data"` (fields listed in `catalog.md`); it animates step by step without writing code. Values that change
+data in `"data"` (fields listed in `catalog/recipes.md`); it animates step by step without writing code. Values that change
 along the scene go as one per step: `"status": ["RUNNING", "DONE"]`, `"values": [30, 72]`. Only the recipes a
 presentation uses are bundled into its HTML.
 

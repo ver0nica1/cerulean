@@ -14,7 +14,7 @@ estilo de la biblioteca (design.style = una carpeta de styles/); una piel propia
 aplica encima, para retoques o diseños a medida. Para que no se parezcan entre sí, cada generación se anota en
 ~/.cerulean/historial.jsonl y se compara con las últimas 8; --no-historial lo desactiva.
 
-    python build.py --catalog                    # regenera catalog.md con lo que hay en styles/ y templates/
+    python build.py --catalog                    # regenera catalog/ con lo que hay en styles/ y templates/
     python build.py --gallery [slugs] [--style X]  # todas las plantillas (o algunas) en un estilo, para revisarlas
 
 Antes de escribir, valida y acota todo: colores, contraste del texto, tipos de pieza, números fuera de rango, pasos y
@@ -139,7 +139,7 @@ def diseno(d) -> dict:
         pal[k + "_paper"] = _legible(pal[k], pal["paper"], pal["paper_ink"], 3)
     pal["on_accent"] = "#111111" if _luz(pal["accent2"]) > 0.25 else "#ffffff"
     if all(pal[k] == v for k, v in DEFAULT_PALETTE.items()):
-        aviso("paleta: es la de por defecto; elige un estilo de catalog.md o escribe una paleta propia (references/direction.md)")
+        aviso("paleta: es la de por defecto; elige un estilo de catalog/styles.md o escribe una paleta propia (references/direction.md)")
     else:
         _acentos_parecidos(pal)
     out = {"world": _mundo(d.get("world")), "mood": str(d.get("mood", ""))[:200], "palette": pal,
@@ -151,7 +151,7 @@ def diseno(d) -> dict:
     faltan = [k for k in (("fonts", "rhythm") if out.get("style") else ("world", "fonts", "rhythm")) if not out[k]]
     if faltan:
         aviso(f"dirección visual incompleta: falta {', '.join(faltan)}; esa parte usa el aspecto por defecto "
-              "(elige un estilo de catalog.md)")
+              "(elige un estilo de catalog/styles.md)")
     if isinstance(d.get("why"), dict):  # la justificación de cada decisión: no cambia nada, pero se conserva
         out["why"] = {str(k)[:20]: str(v)[:300] for k, v in list(d["why"].items())[:8]}
     return out
@@ -610,7 +610,7 @@ def piel(entrada: Path, con_estilo: bool = False) -> str:
     if not ruta.is_file():
         if not con_estilo:
             aviso(f"sin piel: no hay design.style ni {ruta.name}; la presentación usa el aspecto por defecto "
-                  "(elige un estilo de catalog.md)")
+                  "(elige un estilo de catalog/styles.md)")
         return ""
     return _css_seguro(ruta.read_text(encoding="utf-8"), ruta.name)
 
@@ -655,16 +655,14 @@ def estilo(slug: str):
 
 
 def escribir_catalogo():
-    """Regenera catalog.md y pasa a avisos lo que esté mal en la biblioteca."""
-    texto, problemas = lib.catalog()
-    lib.CATALOG.write_text(texto, encoding="utf-8")
-    for p in problemas:
+    """Regenera catalog/ (un archivo por tipo) y pasa a avisos lo que esté mal en la biblioteca."""
+    for p in lib.write_catalog():
         aviso(p)
 
 
 def catalogo_al_dia():
     if not lib.catalog_is_current():
-        aviso("catalog.md está desactualizado: ejecuta python scripts/build.py --catalog")
+        aviso("catalog/ está desactualizado: ejecuta python scripts/build.py --catalog")
 
 
 # ---- Escenas programadas: <presentación>.js junto al JSON --------------------------------------------
@@ -869,7 +867,7 @@ def historial(h: dict, guardar: bool):
 
 def guardar_estilo(args):
     """Convierte el aspecto de una presentación (su design resuelto y su piel propia) en un estilo de la biblioteca,
-    para que las siguientes lo usen sin escribirlo. Regenera catalog.md."""
+    para que las siguientes lo usen sin escribirlo. Regenera catalog/."""
     slug = args.save_style
     if not lib.SLUG.fullmatch(slug):
         sys.exit("Error: el slug del estilo solo puede tener minúsculas, números y guiones")
@@ -933,7 +931,7 @@ def main():
     ap.add_argument("-o", "--salida", type=Path)
     ap.add_argument("--check", action="store_true", help="solo validar")
     ap.add_argument("--no-historial", action="store_true", help=f"no comparar con {HISTORIAL} ni anotar esta")
-    ap.add_argument("--catalog", action="store_true", help="regenerar catalog.md a partir de la biblioteca")
+    ap.add_argument("--catalog", action="store_true", help="regenerar catalog/ a partir de la biblioteca")
     ap.add_argument("--save-style", metavar="SLUG", help="guardar el diseño y la piel propia de la presentación como styles/SLUG/style.css")
     ap.add_argument("--name", help="con --save-style: nombre del estilo")
     ap.add_argument("--mood", help="con --save-style: ánimos separados por comas")
@@ -954,7 +952,7 @@ def main():
         return
     if args.catalog:
         escribir_catalogo()
-        print(f"Escrito: {lib.CATALOG}")
+        print(f"Escrito: {lib.CATALOG} ({', '.join(k.catalog for k in lib.KINDS)})")
         mostrar_avisos()
         if args.entrada is None:
             return

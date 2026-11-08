@@ -64,7 +64,7 @@ Una presentación son tres archivos con el mismo nombre:
 
 ## La dirección visual (`design`)
 
-**Lo normal: un estilo de la biblioteca.** `"design": {"style": "<slug>"}` con un slug de `catalog.md` da la paleta,
+**Lo normal: un estilo de la biblioteca.** `"design": {"style": "<slug>"}` con un slug de `catalog/styles.md` da la paleta,
 las fuentes, el ritmo, el movimiento y la piel. No hace falta escribir nada más. Si aun así escribes alguno de esos
 campos en `design`, tu valor manda sobre el del estilo (por ejemplo, otro `accent`). Un `<tema>.css` propio, si
 existe, se aplica encima del estilo.
@@ -96,7 +96,7 @@ usa el aspecto por defecto y `build.py` avisa.
 ## Diapositivas dentro de un explicador
 
 Una escena puede ser una diapositiva en vez de una escena con pasos: `{"slide": "quote", "quote": "…", "author": "…"}`
-(o `big-number`, `statement`…; los campos de cada maqueta están en `catalog.md`). Sirve como pausa entre escenas,
+(o `big-number`, `statement`…; los campos de cada maqueta están en `catalog/slides.md`). Sirve como pausa entre escenas,
 igual que las fotos entre capítulos de un explicador. El formato completo de diapositivas está en `SKILL.md`.
 
 ## El visual de cada escena

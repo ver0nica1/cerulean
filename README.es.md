@@ -66,7 +66,7 @@ Abre una sesión nueva y pídele a Claude, por ejemplo, *"hazme una presentació
 |---|---|
 | `README.md` y `README.es.md` | Esta guía, para personas, en inglés y en español |
 | `SKILL.md` | Cuándo usar la skill y los pasos que sigue Claude |
-| `catalog.md` | La biblioteca de un vistazo, una línea por estilo, plantilla estática y plantilla animada. Lo genera `build.py --catalog`: es lo único que Claude lee para elegir |
+| `catalog/` | La biblioteca de un vistazo, un archivo por tipo: `styles.md`, `slides.md` (plantillas estáticas) y `recipes.md` (plantillas animadas), una línea por pieza. Lo genera `build.py --catalog`: es lo único que Claude lee para elegir, y solo lo que pide el formato |
 | `styles/` | La biblioteca de estilos, 12 aspectos completos (arcade, blueprint, editorial, garden, heritage, lab, ledger, notebook, playground, poster, swiss, terminal), cada uno en su carpeta (`styles/<slug>/style.css`) con paleta, tipografías, ritmo, movimiento y piel. Cómo añadir uno, en `styles/README.md` |
 | `templates/` | Las escenas ya hechas, separadas en dos (ver `templates/README.md`) |
 | `templates/static/` | **Plantillas estáticas**: las 12 maquetas de diapositiva, cuyo contenido no se mueve, solo entra paso a paso. Cada una en su carpeta con su código (`layout.js`) y una diapositiva de ejemplo (`example.json`). Cómo añadir una, en `templates/static/README.md` |
