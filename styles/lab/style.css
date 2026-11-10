@@ -30,3 +30,25 @@
 .l-section h2 { font-size: 112px; }
 .slide .kick { align-self: flex-start; border: 1.5px solid currentColor; border-radius: 999px; padding: 4px 14px; }
 .l-big-number .bn-val b { font-weight: 400; }
+
+/* ---- The bench's own compositions: cover, backdrop and the big slides ---- */
+/* A ruler along the foot of every slide. */
+.slide::after { content: ""; position: absolute; left: 110px; right: 110px; bottom: 36px; height: 14px; pointer-events: none; border-bottom: 1.5px solid var(--line);
+  background: repeating-linear-gradient(90deg, var(--line) 0 1.5px, transparent 1.5px 20px); }
+/* Cover: a culture dish of concentric rings beside a light serif title; a ruler down the left edge. */
+.cover::before { content: ""; position: absolute; left: 44px; top: 60px; bottom: 60px; width: 22px; pointer-events: none; opacity: .55;
+  border-right: 1.5px solid var(--ink); background: repeating-linear-gradient(to bottom, var(--ink) 0 1.5px, transparent 1.5px 20px); }
+.cover.solo::after { content: ""; position: absolute; right: 130px; top: 180px; width: 540px; height: 540px; border-radius: 50%; pointer-events: none;
+  border: 2px solid var(--accent);
+  background: radial-gradient(circle at 62% 38%, var(--accent2) 0 22px, transparent 23px), radial-gradient(circle at 34% 60%, var(--accent3) 0 13px, transparent 14px),
+    repeating-radial-gradient(circle, transparent 0 44px, color-mix(in srgb, var(--accent) 45%, transparent) 44px 45.5px), color-mix(in srgb, var(--accent) 7%, transparent); }
+.cover h1 .w:last-child { font-style: italic; color: var(--hl); }
+.cover .dek { font: 400 24px/1.5 var(--num); color: var(--ink); max-width: 700px; }
+.cover.solo .cover-txt { left: 120px; width: 780px; }
+.cover.solo .cover-txt h1 { font-size: calc(146px * var(--fit, 1)); line-height: .98; text-wrap: balance; }
+/* Section: the number on a sample tag, over a hairline the width of the page. */
+.l-section .sec-n { opacity: 1; color: var(--hl); font: 500 120px/1 var(--num); letter-spacing: 0; right: 0; top: 0; bottom: auto;
+  border: 2px solid var(--hl); border-radius: 999px; padding: 18px 50px; }
+.l-section .sec-rule { width: 100%; height: 2px; border-radius: 0; background: var(--ink); }
+.l-statement .st-tx { border-top: 2px solid var(--ink); padding-top: 34px; font-weight: 400; }
+.l-big-number .bn-val span { font: 500 44px/1 var(--num); }

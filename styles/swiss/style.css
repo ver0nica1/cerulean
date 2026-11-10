@@ -28,3 +28,22 @@
 .slide .kick { font-family: var(--num); letter-spacing: .04em; text-transform: none; }
 .l-section h2 { font-size: 120px; }
 .l-big-number .bn-val b { font-family: var(--display); font-weight: 600; letter-spacing: -.06em; }
+
+/* ---- The grid's own compositions: cover, backdrop and the big slides ---- */
+/* One black rule under the header and one orange square at the foot of every slide. */
+.slide::before { content: ""; position: absolute; left: 110px; right: 110px; top: 112px; height: 3px; pointer-events: none; background: var(--ink); }
+.slide::after { content: ""; position: absolute; right: 110px; bottom: 44px; width: 34px; height: 34px; pointer-events: none; background: var(--accent); }
+/* Cover: an orange block down the right, a rule across the top, the title hung from it, tight and very large. */
+.cover::before { content: ""; position: absolute; left: 110px; right: 110px; top: 110px; height: 5px; pointer-events: none; background: var(--ink); }
+.cover.solo::before { right: 440px; }
+.cover.solo::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 380px; pointer-events: none; background: var(--accent); }
+.cover h1 .w:last-child { color: var(--hl); }
+.cover .dek { color: var(--ink); max-width: 700px; margin-top: 46px; }
+.l-section::after { display: none; }
+.cover.solo .cover-txt { left: 110px; width: 1040px; top: 170px; bottom: auto; margin-block: 0; }
+.cover.solo .cover-txt h1 { font-size: calc(158px * var(--fit, 1)); line-height: .93; letter-spacing: -.05em; text-wrap: balance; }
+/* Section: a huge orange numeral and a full-width rule. */
+.l-section .sec-n { opacity: 1; color: var(--accent); font: 600 400px/.8 var(--display); letter-spacing: -.08em; right: 0; bottom: 60px; }
+.l-section .sec-rule { width: 100%; height: 4px; border-radius: 0; background: var(--ink); }
+.l-statement .st-tx { font-weight: 600; letter-spacing: -.035em; font-size: 86px; line-height: 1.06; }
+.l-big-number .bn-val b { font-size: 320px; }

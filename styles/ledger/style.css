@@ -27,3 +27,25 @@
 .slide .panel { border-top: 4px solid var(--accent); }
 .slide .kick { letter-spacing: .2em; }
 .slide td, .slide .bn-val b, .slide .sa-item b { font-variant-numeric: tabular-nums; }
+
+/* ---- The report's own compositions: cover, backdrop and the big slides ---- */
+/* A gold spine down the left of every page and a fine gold rule at the foot. */
+.slide::before, .cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; pointer-events: none; background: var(--accent); }
+.slide::after { content: ""; position: absolute; left: 110px; right: 110px; bottom: 44px; height: 1px; pointer-events: none; background: color-mix(in srgb, var(--accent) 60%, transparent); }
+/* Cover: a wider spine, rising gold columns on the right, and a large serif title. */
+.cover::before { width: 46px; }
+.cover.solo::after { content: ""; position: absolute; right: 120px; bottom: 130px; width: 530px; height: 500px; pointer-events: none; border-bottom: 2px solid var(--accent);
+  background: linear-gradient(color-mix(in srgb, var(--accent) 30%, transparent) 0 0) 0 100% / 90px 34% no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 45%, transparent) 0 0) 110px 100% / 90px 48% no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 60%, transparent) 0 0) 220px 100% / 90px 43% no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent) 0 0) 330px 100% / 90px 70% no-repeat,
+    linear-gradient(var(--accent) 0 0) 440px 100% / 90px 100% no-repeat; }
+.cover h1 .w:last-child { color: var(--accent); }
+.cover .dek { color: var(--ink); max-width: 700px; padding-top: 26px; border-top: 1px solid var(--accent); }
+.cover.solo .cover-txt { left: 130px; width: 820px; }
+.cover.solo .cover-txt h1 { font-size: calc(118px * var(--fit, 1)); line-height: 1.02; text-wrap: balance; }
+/* Section: the number as a ledger figure, over a gold rule the width of the page. */
+.l-section .sec-n { opacity: 1; color: var(--accent); font: 500 250px/1 var(--num); letter-spacing: -.04em; right: 0; bottom: 30px; }
+.l-section .sec-rule { width: 760px; height: 2px; border-radius: 0; background: var(--accent); }
+.l-statement .st-tx::before { content: ""; display: block; width: 120px; height: 6px; margin-bottom: 36px; background: var(--accent); }
+.l-big-number .bn-val { align-self: flex-start; padding-bottom: 18px; border-bottom: 2px solid var(--accent); }

@@ -32,3 +32,31 @@
 .l-section .sec-rule { background: var(--accent); }
 .l-statement .st-tx { text-transform: uppercase; font-weight: 400; font-size: 92px; line-height: 1.12; }
 .l-big-number .bn-val b { font-weight: 400; font-size: 300px; }
+
+/* ---- The poster's own compositions: cover, backdrop and the big slides ---- */
+/* Halftone print dots fading in from a corner, on every slide and on the cover. */
+.slide::before, .cover::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(115deg, var(--bg) 52%, transparent 96%),
+    radial-gradient(circle, color-mix(in srgb, var(--ink) 22%, transparent) 2.4px, transparent 2.9px) 0 0 / 22px 22px; }
+/* Cover: a red sun behind a huge tilted headline, its last word in yellow, and hazard tape across the bottom. */
+.cover.solo::before { background:
+    radial-gradient(circle at 86% 30%, var(--accent2) 0 250px, transparent 252px),
+    linear-gradient(115deg, var(--bg) 46%, transparent 96%),
+    radial-gradient(circle, color-mix(in srgb, var(--ink) 22%, transparent) 2.4px, transparent 2.9px) 0 0 / 22px 22px; }
+.cover::after, .l-statement::after { content: ""; position: absolute; left: -40px; right: -40px; bottom: 70px; height: 48px; rotate: -2.5deg;
+  pointer-events: none; background: repeating-linear-gradient(-45deg, var(--accent) 0 32px, #111111 32px 64px); outline: 4px solid #111111; }
+.l-statement::after { bottom: 46px; height: 30px; rotate: 1.5deg; }
+.cover h1 .w:last-child { color: var(--accent); }
+.cover .kick { rotate: -3deg; font-weight: 800; margin-bottom: 44px; }
+.cover .dek { max-width: 760px; margin-top: 44px; padding-left: 22px; border-left: 12px solid var(--accent2); color: var(--ink); font-weight: 600; }
+.cover.solo .cover-txt { left: 100px; width: 1400px; top: 0; bottom: 110px; }
+.cover.solo .cover-txt h1 { font-size: calc(172px * var(--fit, 1)); line-height: .93; rotate: -3deg; transform-origin: 0 100%; text-wrap: balance; }
+/* Section: an outlined giant numeral and a strip of tape for a rule. */
+/* In the huge section title a highlight box would cover the line above: highlight with color instead. */
+.l-section h2 strong { background: none; color: var(--hl); padding: 0; }
+.l-section .sec-n { opacity: 1; color: color-mix(in srgb, var(--hl) 20%, transparent); -webkit-text-stroke: 6px var(--hl); font-size: 500px; right: 40px; bottom: -10px; rotate: -6deg; }  /* kept inside the page: the PDF drops what overflows it */
+.l-section .sec-rule { width: 320px; height: 24px; border-radius: 0; rotate: -2deg;
+  background: repeating-linear-gradient(-45deg, var(--accent) 0 18px, #111111 18px 36px); outline: 3px solid #111111; }
+.l-statement .st-tx { rotate: -1.5deg; transform-origin: 0 50%; }
+.l-big-number .bn-val b { rotate: -4deg; transform-origin: 0 100%; text-shadow: 10px 10px 0 var(--accent2); }

@@ -36,3 +36,24 @@
 .l-statement .st-tx, .l-quote .qu-tx { font-family: var(--display); font-size: 38px; line-height: 1.5; }
 .l-big-number .bn-val b { font-family: var(--display); font-size: 150px; }
 .l-quote .qu-mark { font-family: var(--text); }
+
+/* ---- The cabinet's own compositions: cover, backdrop and the big slides ---- */
+/* A starfield behind every screen. */
+.slide::before, .cover::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .55;
+  background: radial-gradient(circle, var(--ink) 1.2px, transparent 1.6px) 0 0 / 90px 70px,
+    radial-gradient(circle, var(--accent2) 1.6px, transparent 2px) 40px 30px / 130px 110px; }
+/* Cover: a neon grid floor under a striped sun, and a tall pixel title. */
+.cover.solo::before { opacity: 1; background:
+    linear-gradient(to bottom, var(--bg) 0 61%, transparent 61%),
+    linear-gradient(var(--accent2) 0 3px, transparent 3px) 0 61% / 100% 46px,
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 80%, transparent) 0 3px, transparent 3px) 0 0 / 80px 100%; }
+.cover.solo::after { content: ""; position: absolute; right: 190px; top: 139px; width: 420px; height: 410px; border-radius: 420px 420px 0 0;
+  pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 34px, var(--bg) 34px 44px), linear-gradient(var(--accent3), var(--accent)); }
+.cover.solo .cover-txt { left: 100px; width: 860px; top: 0; bottom: 330px; }
+.cover.solo .cover-txt h1 { font-size: calc(76px * var(--fit, 1)); line-height: 1.3; }
+.cover .dek { color: var(--ink); font-weight: 600; }
+/* Section: the level number in pixels, and a loading bar for a rule. */
+.l-section h2 { max-width: 1000px; }
+.l-section .sec-n { opacity: 1; color: var(--accent3); text-shadow: 10px 10px 0 var(--accent); font-size: 220px; right: 10px; top: 0; bottom: auto; }
+.l-section .sec-rule { width: 430px; height: 24px; border-radius: 0; background: repeating-linear-gradient(90deg, var(--hl) 0 24px, transparent 24px 32px); }
+.l-big-number .bn-val b { text-shadow: 8px 8px 0 var(--accent); }

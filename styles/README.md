@@ -53,4 +53,12 @@ It starts with a metadata header (JSON inside a comment), followed by the skin C
   notes or stage, load external files or use `position: fixed`. `build.py` rejects it with a warning otherwise.
 - Text must reach 4.5:1 contrast on its background; check with `CERULEAN_REPORT()`.
 - If the style changes `.slide h2 { font-size }`, set `.l-section h2` again too: the style's rule would win over it.
+- **Give the style its own compositions, not only colors and fonts** (see `poster` and `editorial`): a cover of its
+  own (`.cover.solo .cover-txt`, `.cover h1`, its last word with `.cover h1 .w:last-child`, decoration in
+  `.cover::before` / `::after`), a backdrop (`.slide::before`, or `background-image` on `.slide, .cover`: gradients and
+  patterns only, no files) and its own take on the big slides (`.l-section .sec-n`, `.sec-rule`, `.l-statement .st-tx`,
+  `.l-big-number .bn-val b`). One signature element that repeats (a strip of tape, a masthead rule) ties them together.
+  Keep heavy cover treatments under `.cover.solo`: with an illustration the title column is only 700px wide.
+  Size the big title as `calc(150px * var(--fit, 1))`: the viewer lowers `--fit` for long titles. Nothing may reach
+  past the page: the PDF drops what overflows it.
 - Folders whose name starts with `_` are ignored.

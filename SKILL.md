@@ -14,7 +14,7 @@ You pick and fill; Cerulean builds. A presentation is a JSON script; its look co
 - **Explainer** (`"format": "explainer"`), to read or show step by step: each scene is one idea in 2–4 steps, a step
   card on the left and, on the right, an illustration that changes with every step: a ready-made **recipe**, an
   animated template from `templates/animated/` fed with data (departure board, terminal, nodes, grid of 100, bars,
-  trend line, container, document, balance, conveyor, chat, donut, funnel, stack, swarm), a screenshot/photo that
+  trend line, container, document, balance, conveyor, chat, donut, funnel, stack, swarm, range, causes, rooms), a screenshot/photo that
   zooms and gets labeled, or, in one signature scene per explainer, a drawing made by hand for that topic.
 
 Formats can be mixed: an explainer can use a `quote` or `big-number` slide as a pause.

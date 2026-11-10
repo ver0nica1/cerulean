@@ -1,0 +1,24 @@
+{
+  "title": "Causes and their share",
+  "theme": "fondo",
+  "recipe": "causes",
+  "data": {
+    "result": "today's extra speed",
+    "causes": [
+      {"label": "training compute", "out": 2},
+      {"label": "data"},
+      {"label": "algorithms"},
+      {"label": "hiring"},
+      {"label": "AI help"}
+    ],
+    "shares": [
+      {"label": "AI use, perhaps 80%", "value": 80, "cause": 4, "step": 3},
+      {"label": "data, algorithms, hiring", "value": 20, "step": 3}
+    ]
+  },
+  "steps": [
+    {"text": "Five possible causes: **compute, data, algorithms, hiring** and help from AI.", "note": ""},
+    {"text": "Faster growth in **compute** did not cause the change.", "note": ""},
+    {"text": "Perhaps **80%** of the extra speed comes from using AI.", "note": ""}
+  ]
+}

@@ -31,3 +31,21 @@
 .slide .kick { font-variant: small-caps; text-transform: none; letter-spacing: .2em; font-size: 24px; }
 .slide .kick::after { content: " \2766"; }
 .l-quote .qu-tx, .l-statement .st-tx { font-style: italic; font-weight: 500; }
+
+/* ---- The pamphlet's own compositions: cover, backdrop and the big slides ---- */
+/* Every page inside a double printer's frame. */
+.slide::before, .cover::before { content: ""; position: absolute; inset: 14px; pointer-events: none; border: 3px double var(--ink); }
+/* Cover: a title page, everything centered between rules, with an ornament over the subtitle. */
+.cover.solo::after { content: ""; position: absolute; inset: 30px; pointer-events: none; border: 1px solid var(--ink); }
+.cover h1 .w:last-child { font-style: italic; color: var(--hl); }
+.cover .dek { font-style: italic; color: var(--ink); font-size: 36px; }
+.cover .dek::before { content: "\2766"; display: block; font-style: normal; font-size: 44px; color: var(--hl); margin-bottom: 10px; }
+.cover.solo .cover-txt { left: 200px; width: 1200px; text-align: center; }
+.cover.solo .cover-txt h1 { font-size: calc(132px * var(--fit, 1)); line-height: 1; letter-spacing: .01em; text-wrap: balance; }
+.cover.solo .dek { margin-inline: auto; max-width: 820px; }
+/* Section: a chapter opening, centered: the numeral in italics, the title, a double rule. */
+.l-section .sl { align-items: center; text-align: center; }
+.l-section .sec-n { position: static; opacity: 1; color: var(--hl); font: italic 500 150px/1 var(--display); letter-spacing: 0; }
+.l-section .sec-rule { width: 320px; height: 9px; border-radius: 0; background: none; border-top: 3px double var(--ink); }
+.l-statement .sl { align-items: center; text-align: center; }
+.l-statement .st-tx::before { content: "\2766"; display: block; font-style: normal; font-size: 46px; color: var(--hl); margin-bottom: 18px; }

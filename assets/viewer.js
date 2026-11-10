@@ -12,10 +12,19 @@
   const K = JSON.parse(document.getElementById("deck-data").textContent);
   const W = 1600, H = 900;
   const PAL = K.design.palette;
-  // El temperamento: cuánto se acerca t al paso en cada fotograma (más alto, más seco; más bajo, más lento).
+  // El temperamento: smooth (0.03 lento a 0.3 seco) fija cuánto dura el paso de un paso al siguiente. t viaja con
+  // una duración fija y una curva que arranca y frena suave (no un acercamiento por fotograma, que arranca de golpe y
+  // depende de los Hz de la pantalla): así los tramos escalonados de cada escena se ven de verdad escalonados.
   const DECK_STYLE = K.design;
   const MOT = K.design.motion;
   const SMOOTH = (MOT && MOT.smooth) || { preciso: 0.16, fluido: 0.08, energico: 0.12, solemne: 0.05 }[MOT] || 0.09;
+  const STEP_MS = 850 * Math.min(2.2, Math.max(0.5, 0.09 / SMOOTH));  // avanzar un paso; al entrar en la escena, un poco más
+  const easeT = (p) => 0.5 - Math.cos(Math.PI * p) / 2;
+  function tween(P, now) {  // t empieza a ir hacia P.target desde donde esté
+    const d = P.target - P.t;
+    P.from = P.t; P.start = now;
+    P.dur = d < 0 ? Math.max(250, STEP_MS * 0.45) : STEP_MS * (P.t <= -0.999 ? 1.35 : 1) * (0.75 + 0.25 * Math.min(Math.abs(d), 3));
+  }
   // Con ritmo claro, la portada va sobre papel y el cierre sobre fondo; si no, al revés.
   const [COVER_T, END_T] = K.design.rhythm === "claro" ? ["papel", "fondo"] : ["fondo", "papel"];
   const SAVE = window.CERULEAN_SAVE || null;
@@ -213,13 +222,14 @@
     if (si === 0) {
       const piece = visual(K.cover, ["cover"], COVER_T);
       const words = K.title.split(" ").map((w, i) => h("span", { class: "w", style: `--i:${i}`, text: w }));
-      const toc = h("div", { class: "toc" }, K.scenes.map((s, i) => h("button", { type: "button", class: `c${i % 3}`, title: s.title, style: `--i:${i}`, "data-go": i + 1 })));
       const title = ed(h("h1", {}, words), ["title"]);
       // Sin ilustración de portada (lo normal en diapositivas), el título ocupa todo el ancho.
       const solo = !K.cover.draw && !K.cover.image && !(K.cover.objects || []).length;
-      const el = h("section", { class: `scene cover t-${COVER_T} h0${solo ? " solo" : ""}` },
+      // --fit shrinks the big cover title of a style when the title is long (1 up to 22 characters, down to .58).
+      const fit = Math.max(0.58, Math.min(1, Math.sqrt(22 / Math.max(1, K.title.length))));
+      const el = h("section", { class: `scene cover t-${COVER_T} h0${solo ? " solo" : ""}`, style: `--fit:${fit.toFixed(3)}` },
         h("div", { class: "cover-txt" }, ed(h("p", { class: "kick", text: K.kicker }), ["kicker"]), title,
-          ed(h("p", { class: "dek", text: K.subtitle }), ["subtitle"]), toc), piece.fig);
+          ed(h("p", { class: "dek", text: K.subtitle }), ["subtitle"])), piece.fig);
       return { s: K.cover, el, piece, steps: [], n: 1, title: "", path: ["cover"] };
     }
     if (si === last) {
@@ -426,9 +436,11 @@
     const P = x.piece;
     if (P.kind === "code") {
       // Paso k es t = k - 1; k = 0 (fuera de escena) es t = -1. Al entrar, t parte de -1: la entrada se ve entera.
+      const before = P.target;
       P.target = k - 1;
       if (first || k === 0) P.t = -1;
       if (document.body.classList.contains("snap") || REDUCED) P.t = P.target;
+      if (first || k === 0 || P.target !== before || P.start == null) tween(P, performance.now());
       drawCode(P, P.t, performance.now());
     } else if (P.kind === "slide") {
       P.parts.forEach((p) => p.classList.toggle("in", k >= (+p.dataset.step || 1)));
@@ -478,8 +490,10 @@
   function loop(now) {
     const x = scenes[curScene];
     if (x && x.piece.kind === "code" && x.piece.frame && !document.body.classList.contains("snap")) {
-      const P = x.piece, d = P.target - P.t;
-      P.t = REDUCED || Math.abs(d) < 0.002 ? P.target : P.t + d * SMOOTH;
+      const P = x.piece;
+      if (P.start == null) tween(P, now);
+      const p = P.dur > 0 ? Math.min(1, (now - P.start) / P.dur) : 1;
+      P.t = REDUCED || p >= 1 ? P.target : P.from + (P.target - P.from) * easeT(p);
       drawCode(P, P.t, now);
     }
     requestAnimationFrame(loop);
@@ -784,7 +798,7 @@
 .raster .scene > .sh { display: block; }
 .raster .grip { display: none !important; }
 .raster .card, .raster .set, .raster .cover-txt { outline: none !important; }
-.raster .cover h1 .w, .raster .cover .dek, .raster .toc button { opacity: 1; translate: none; scale: none; clip-path: none; filter: none; }`;
+.raster .cover h1 .w, .raster .cover .dek { opacity: 1; translate: none; scale: none; clip-path: none; filter: none; }`;
   // ([<] y no un < suelto: build.py cambia cada "</" del visor por "<\/" al meterlo en el HTML.)
   const xmlText = (s) => s.replace(/&/g, "&amp;").replace(/[<]/g, "&lt;").replace(/>/g, "&gt;");
   // Una escena como imagen JPEG de 3200 × 1800 (el doble de la diapositiva, para que se lea nítida).

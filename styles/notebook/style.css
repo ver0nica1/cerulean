@@ -46,3 +46,23 @@
 
 .end-card { rotate: -1deg; }
 .end-card .keep { text-decoration: underline wavy var(--accent3); text-underline-offset: 10px; text-decoration-thickness: 3px; }
+
+/* ---- The notebook's own compositions: cover, backdrop and the big slides ---- */
+/* Dot-grid paper under everything, and a strip of tape at the top of each slide. */
+.slide::before, .cover::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--ink) 16%, transparent) 1.6px, transparent 2px) 0 0 / 30px 30px; }
+.slide::after { content: ""; position: absolute; right: 130px; top: 34px; width: 170px; height: 42px; rotate: 4deg; pointer-events: none;
+  background: color-mix(in srgb, var(--accent2) 60%, transparent); }
+/* Cover: a ruled page with its red margin, tilted beside the title. */
+.cover.solo::after { content: ""; position: absolute; right: 150px; top: 170px; width: 430px; height: 540px; rotate: 5deg; border-radius: 4px 24px 24px 4px;
+  pointer-events: none; box-shadow: 0 30px 50px -24px #000000aa;
+  background: linear-gradient(90deg, transparent 0 58px, #e0675a 58px 60px, transparent 60px),
+    repeating-linear-gradient(to bottom, transparent 0 43px, color-mix(in srgb, var(--accent) 35%, transparent) 43px 45px), #fffdf6; }
+.cover .dek { color: var(--ink); max-width: 700px; }
+.cover.solo .cover-txt { left: 110px; width: 860px; }
+.cover.solo .cover-txt h1 { font-size: calc(126px * var(--fit, 1)); line-height: 1.04; text-wrap: balance; }
+/* Section: the number circled with a marker, and a dotted line for a rule. */
+.l-section .sec-n { opacity: 1; display: grid; place-items: center; width: 260px; height: 260px; border-radius: 50%; background: var(--hl); color: var(--bg);
+  font-size: 170px; letter-spacing: 0; rotate: -6deg; right: 80px; bottom: 70px; }
+.l-section .sec-rule { width: 260px; height: 8px; border-radius: 0; background: none; border-bottom: 7px dotted var(--hl); }
+.l-statement .st-tx { rotate: -1deg; transform-origin: 0 50%; }

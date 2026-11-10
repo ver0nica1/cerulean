@@ -24,3 +24,22 @@
 
 .slide { --radius: 40px 10px 40px 10px; --panel-shadow: 0 18px 36px -22px #00000088; }
 .slide .kick { align-self: flex-start; background: color-mix(in srgb, var(--accent) 22%, transparent); padding: 4px 14px; border-radius: 999px; color: inherit; }
+
+/* ---- The garden's own compositions: cover, backdrop and the big slides ---- */
+/* A leaf in the corner of every page. */
+.slide::before { content: ""; position: absolute; right: 44px; bottom: 44px; width: 300px; height: 300px; border-radius: 100% 0 100% 0;
+  pointer-events: none; background: var(--hl); opacity: .13; }
+/* Cover: two overlapping leaves beside a large title. */
+.cover.solo::before { content: ""; position: absolute; right: 150px; top: 150px; width: 520px; height: 520px; border-radius: 100% 0 100% 0; rotate: 8deg;
+  pointer-events: none; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--bg))); }
+.cover.solo::after { content: ""; position: absolute; right: 560px; top: 500px; width: 250px; height: 250px; border-radius: 0 100% 0 100%; rotate: -10deg;
+  pointer-events: none; background: var(--accent2); }
+.cover h1 .w:last-child { color: var(--accent2); }
+.cover .dek { color: var(--ink); max-width: 700px; }
+.cover.solo .cover-txt { left: 110px; width: 700px; }
+.cover.solo .cover-txt h1 { font-size: calc(122px * var(--fit, 1)); line-height: 1.02; text-wrap: balance; }
+/* Section: the number on a seed, and a soft stem for a rule. */
+.l-section .sec-n { opacity: 1; display: grid; place-items: center; width: 290px; height: 290px; border-radius: 50% 50% 50% 10px; background: var(--hl);
+  color: var(--bg); font-size: 180px; letter-spacing: 0; right: 70px; bottom: 60px; }
+.l-section .sec-rule { width: 230px; height: 10px; border-radius: 999px; }
+.l-statement .st-tx { border-left: 10px solid var(--hl); border-radius: 6px; padding-left: 40px; }

@@ -44,3 +44,27 @@
 
 .stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 6; opacity: .25;
   background: repeating-linear-gradient(to bottom, transparent 0 3px, #00000055 3px 4px); }
+
+/* ---- The console's own compositions: cover, backdrop and the big slides ---- */
+/* Every slide is a window: a one-pixel frame with its title bar and three buttons. */
+.slide::before, .cover::before { content: ""; position: absolute; inset: 14px; pointer-events: none; border: 1px solid color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: radial-gradient(circle at 16px 9px, var(--accent3) 0 4px, transparent 5px), radial-gradient(circle at 32px 9px, var(--accent) 0 4px, transparent 5px),
+    radial-gradient(circle at 48px 9px, var(--accent2) 0 4px, transparent 5px),
+    linear-gradient(color-mix(in srgb, var(--accent2) 16%, transparent) 0 0) 0 0 / 100% 18px no-repeat; }
+/* Cover: a boot screen: the title typed at a prompt with a blinking cursor, and a loading bar. */
+.cover h1::before { content: "> "; color: var(--accent); }
+.cover h1::after { content: "_"; color: var(--accent); animation: cursor 1s steps(1) infinite; }
+.cover .dek { color: var(--ink); }
+.cover .dek::before { content: "# "; color: var(--accent2); }
+.cover.solo::after { content: ""; position: absolute; left: 110px; bottom: 110px; width: 640px; height: 26px; pointer-events: none; border: 1px solid var(--accent2);
+  background: repeating-linear-gradient(90deg, var(--accent2) 0 14px, transparent 14px 20px) 4px 4px / 72% 16px no-repeat; }
+.cover.solo .cover-txt { left: 110px; width: 1340px; top: 0; bottom: 120px; }
+.cover.solo .cover-txt h1 { font-size: calc(100px * var(--fit, 1)); line-height: 1.08; }
+/* Section: the number as an index in brackets, and a dashed rule the width of the window. */
+.l-section h2 { max-width: 980px; }
+.l-section .sec-n { opacity: 1; color: var(--hl); font-size: 190px; letter-spacing: 0; right: 0; top: 0; bottom: auto;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--hl) 45%, transparent); }
+.l-section .sec-n::before { content: "["; } .l-section .sec-n::after { content: "]"; }
+.l-section .sec-rule { width: 100%; height: 4px; border-radius: 0; background: repeating-linear-gradient(90deg, var(--hl) 0 12px, transparent 12px 20px); }
+.l-statement .st-tx::before { content: "> "; color: var(--hl); }
+.l-big-number .bn-val b { text-shadow: 0 0 30px color-mix(in srgb, var(--hl) 50%, transparent); }

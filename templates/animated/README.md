@@ -14,9 +14,29 @@ templates/animated/
 │   └── example.json
 ├── bars/
 │   ├── recipe.js         the code: metadata header + recipe("bars", …)
-│   └── example.json      one sample scene, exactly as it goes in a deck's "scenes"
+│   └── example.json      one sample scene, exactly as it goes in a deck's "scenes" (or a list, one per variant)
 └── …
 ```
+
+## Variant, new recipe, or nothing?
+
+Before adding an animation, describe it in two parts, **what data it draws** and **how it moves**, and compare it with
+`catalog/recipes.md`:
+
+- **Same data and same drawing, another way of moving or looking → a variant** of that recipe, not a new one. A
+  variant costs a few words in the catalog line; a recipe costs a whole line that every explainer reads.
+- **Data of another shape, or another drawing → a new recipe** (next section).
+- **Something that already serves the same purpose → add nothing.**
+
+A variant is an optional field in `data`:
+
+1. **Without the field, the recipe looks exactly as before**, so existing decks don't change.
+2. **Use the same field names in every recipe:** `motion` for how it moves, `frame` for the box around it, `shape` for
+   the form of the main piece. Other optional extras (marks, reference lines…) get short plain names.
+3. In the header's `params`, give each option **what it is for** in a few words, so Claude can pick it:
+   `motion? (draw: a line that draws itself | dots: separate estimates, not joined)`.
+4. Add one scene for it to `example.json`, which then becomes a list (one scene per variant), so the gallery shows
+   them side by side.
 
 ## Add a recipe
 

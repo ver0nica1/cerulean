@@ -159,9 +159,6 @@ body.fs:not(.awake) { cursor: none; }
 @keyframes wordIn { to { opacity: 1; translate: none; } }
 .cover .dek { font-size: 30px; line-height: 1.35; color: var(--mute); margin: 30px 0 0; opacity: 0; }
 .cover.cur .dek { animation: fadeIn 1s ease 1s forwards; }
-.toc { display: flex; gap: 12px; margin-top: 40px; }
-.toc button { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; opacity: 0; scale: .2; }
-.cover.cur .toc button { animation: popIn .5s cubic-bezier(.3, 1.6, .5, 1) forwards; animation-delay: calc(var(--i) * 70ms + 1.3s); }
 @keyframes popIn { to { opacity: 1; scale: 1; } }
 @keyframes fadeIn { to { opacity: 1; } }
 .cover .set { width: 860px; right: 30px; top: 90px; }
@@ -175,7 +172,7 @@ body.fs:not(.awake) { cursor: none; }
 
 /* ---- Sin animación (vista general, PDF) ---- */
 body.snap .stage *, body.snap .stage *::before { transition: none !important; animation: none !important; }
-body.snap .cover h1 .w, body.snap .cover .dek, body.snap .toc button { opacity: 1; translate: none; scale: none; }
+body.snap .cover h1 .w, body.snap .cover .dek { opacity: 1; translate: none; scale: none; }
 
 /* ---- Vista general: todas las escenas en miniatura ---- */
 body.grid .screen { overflow: auto; }
@@ -402,5 +399,5 @@ body.editing .view, body.editing .slide .pic { cursor: pointer; }
 .slide .pic.empty b { font: 500 32px/1.2 var(--display); color: var(--ink); }
 /* Portada sin ilustración: el título ocupa el ancho. */
 .cover.solo .cover-txt { left: 110px; width: 1300px; }
-.cover.solo .cover-txt h1 { font-size: 112px; }
+.cover.solo .cover-txt h1 { font-size: calc(112px * var(--fit, 1)); }
 .cover.solo .set { display: none; }

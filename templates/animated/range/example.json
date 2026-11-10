@@ -1,0 +1,22 @@
+{
+  "title": "Range of estimates",
+  "theme": "papel",
+  "recipe": "range",
+  "data": {
+    "axis": "times the earlier pace",
+    "decimals": 1,
+    "min": 1,
+    "max": 3,
+    "ref": {"value": 1, "label": "no speed-up"},
+    "items": [
+      {"label": "main estimate", "value": 1.9, "low": 1.5, "high": 2.8},
+      {"label": "other modeling choices", "value": 1.9, "low": 1.1, "high": 2.9, "step": 2},
+      {"label": "all frontier models", "value": 1.4, "step": 3}
+    ]
+  },
+  "steps": [
+    {"text": "The main estimate is **1.9 times**, somewhere between 1.5 and 2.8.", "note": ""},
+    {"text": "Change one modeling choice and it moves **from 1.1 to 2.9**.", "note": ""},
+    {"text": "Across all frontier models, only **1.4 times**.", "note": ""}
+  ]
+}

@@ -1,64 +1,91 @@
-{
-  "title": "The line",
-  "theme": "papel",
-  "recipe": "line",
-  "data": {
-    "unit": "%",
-    "until": [
-      4,
-      9
-    ],
-    "points": [
-      {
-        "label": "Jan",
-        "value": 12
-      },
-      {
-        "label": "Feb",
-        "value": 15
-      },
-      {
-        "label": "Mar",
-        "value": 14
-      },
-      {
-        "label": "Apr",
-        "value": 19
-      },
-      {
-        "label": "May",
-        "value": 22
-      },
-      {
-        "label": "Jun",
-        "value": 21
-      },
-      {
-        "label": "Jul",
-        "value": 28
-      },
-      {
-        "label": "Aug",
-        "value": 33
-      },
-      {
-        "label": "Sep",
-        "value": 31
-      },
-      {
-        "label": "Oct",
-        "value": 38
-      }
+[
+  {
+    "title": "line · a trend that breaks",
+    "theme": "fondo",
+    "recipe": "line",
+    "data": {
+      "title": "Points gained since 2020",
+      "subtitle": "fitted trends",
+      "split": 1,
+      "until": [1, 2, 2],
+      "ticks": [2020, 2021, 2022, 2023, 2024, 2025, 2026],
+      "points": [
+        {"at": 2020.2, "value": 0, "tag": "March 2020"},
+        {"at": 2022.8, "value": 21, "tag": "October 2022"},
+        {"at": 2023.8, "value": 45, "tag": "October 2023"}
+      ],
+      "slopes": [
+        {"from": 0, "to": 1, "label": "8 points a year"},
+        {"from": 1, "to": 2, "label": "24 points a year"}
+      ],
+      "project": {"from": 0, "to": 1, "label": "old pace: 2025", "step": 3}
+    },
+    "steps": [
+      {"text": "For two and a half years, about **8 points a year**.", "note": ""},
+      {"text": "Then the pace **tripled**.", "note": ""},
+      {"text": "At the old pace, that level would have taken **until 2025**.", "note": ""}
     ]
   },
-  "steps": [
-    {
-      "text": "Until **May**, slow growth.",
-      "note": ""
+  {
+    "title": "line · month by month",
+    "theme": "papel",
+    "recipe": "line",
+    "data": {
+      "title": "Online sales, share of the total",
+      "unit": "%",
+      "until": [4, 9],
+      "points": [
+        {"label": "Jan", "value": 12}, {"label": "Feb", "value": 15}, {"label": "Mar", "value": 14},
+        {"label": "Apr", "value": 19}, {"label": "May", "value": 22}, {"label": "Jun", "value": 21},
+        {"label": "Jul", "value": 28}, {"label": "Aug", "value": 33}, {"label": "Sep", "value": 31},
+        {"label": "Oct", "value": 38}
+      ]
     },
-    {
-      "text": "Then it **speeds up**.",
-      "note": ""
-    }
-  ]
-}
+    "steps": [
+      {"text": "Until **May**, slow growth.", "note": ""},
+      {"text": "Then it **speeds up**.", "note": ""}
+    ]
+  },
+  {
+    "title": "line · values",
+    "theme": "fondo",
+    "recipe": "line",
+    "data": {
+      "title": "Readers per month, in thousands",
+      "values": true,
+      "points": [
+        {"label": "Jan", "value": 18}, {"label": "Feb", "value": 22}, {"label": "Mar", "value": 21},
+        {"label": "Apr", "value": 27}, {"label": "May", "value": 31}, {"label": "Jun", "value": 36}
+      ],
+      "ref": {"value": 30, "label": "goal", "step": 2}
+    },
+    "steps": [
+      {"text": "Readers grew **almost every month**.", "note": ""},
+      {"text": "Since **May**, above the goal.", "note": ""}
+    ]
+  },
+  {
+    "title": "line · dots",
+    "theme": "papel",
+    "recipe": "line",
+    "data": {
+      "title": "Estimated speed-up, times",
+      "motion": "dots",
+      "decimals": 1,
+      "min": 1,
+      "until": [1, 3, 3],
+      "points": [
+        {"label": "Jul", "value": 1.5, "tag": "first estimate, 1.5", "low": 1.3, "high": 1.8},
+        {"label": "Aug", "value": 1.6, "tag": "report A, 1.6"},
+        {"label": "Sep", "value": 1.7, "tag": "report B, 1.7"},
+        {"label": "Oct", "value": 1.9, "tag": "main estimate, 1.9", "low": 1.5, "high": 2.3}
+      ],
+      "ref": {"value": 2, "label": "2× line", "step": 3}
+    },
+    "steps": [
+      {"text": "The **first estimates** were modest.", "note": ""},
+      {"text": "Each new one came out **higher**.", "note": ""},
+      {"text": "Still under the **2× line**, but close.", "note": ""}
+    ]
+  }
+]

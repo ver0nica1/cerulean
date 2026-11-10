@@ -563,7 +563,8 @@ def variedad(escenas: list, ritmo):
 
 def _armar(dk: dict, escenas: list, cover: dict) -> dict:
     design = diseno(dk.get("design"))
-    variedad(escenas, design["rhythm"])
+    if not dk.get("gallery"):  # a gallery shows templates (and their variants) side by side on purpose
+        variedad(escenas, design["rhythm"])
     return {
         "design": design,
         "kicker": str(dk.get("kicker", ""))[:80], "title": str(dk.get("title", "Presentación"))[:140],
@@ -595,7 +596,7 @@ MAX_PIEL = 16000
 # Va después de la piel: aunque la piel anime o esconda cosas, la vista general y el PDF las muestran quietas y enteras.
 GUARDA = """
 body.snap .stage *, body.snap .stage *::before, body.snap .stage *::after { transition: none !important; animation: none !important; }
-body.snap .cover h1 .w, body.snap .cover .dek, body.snap .toc button, body.snap .card li.now { opacity: 1 !important;
+body.snap .cover h1 .w, body.snap .cover .dek, body.snap .card li.now { opacity: 1 !important;
   translate: none !important; scale: none !important; clip-path: none !important; filter: none !important; }
 @media (prefers-reduced-motion: reduce) { .stage *, .stage *::before, .stage *::after { animation-duration: .01ms !important;
   animation-delay: 0s !important; transition-duration: .01ms !important; } }

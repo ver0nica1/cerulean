@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cerulean-line",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["scripts/preview.py", "--template", "line,range,causes,rooms", "--style", "swiss"],
+      "port": 8767
+    },
+    {
+      "name": "cerulean-dark",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["scripts/preview.py", "--template", "section,statement,big-number", "--style", "poster", "--port", "8768"],
+      "port": 8768
+    }
+  ]
+}

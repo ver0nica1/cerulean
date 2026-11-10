@@ -28,3 +28,25 @@
 .slide h2 { font-weight: 800; }
 .slide .kick { align-self: flex-start; background: var(--accent2); color: #1a1a2e; padding: 6px 16px; border-radius: 999px; rotate: -2deg; }
 .slide .panel:nth-child(odd) { rotate: -1deg; } .slide .panel:nth-child(even) { rotate: 1deg; }
+
+/* ---- The classroom wall's own compositions: cover, backdrop and the big slides ---- */
+/* Confetti in the corners of every slide. */
+.slide::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 94% 12%, var(--accent3) 0 26px, transparent 27px), radial-gradient(circle at 97.5% 24%, var(--accent2) 0 12px, transparent 13px),
+    radial-gradient(circle at 88% 7%, var(--accent) 0 9px, transparent 10px), radial-gradient(circle at 4% 92%, var(--accent) 0 20px, transparent 21px),
+    radial-gradient(circle at 8% 96%, var(--accent3) 0 9px, transparent 10px); }
+/* Cover: cut-paper shapes on the right and a very big, bouncy title. */
+.cover.solo::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 60% 16%, var(--accent2) 0 34px, transparent 35px), radial-gradient(circle at 92% 82%, var(--accent) 0 60px, transparent 61px),
+    radial-gradient(circle at 66% 86%, var(--accent3) 0 18px, transparent 19px), radial-gradient(circle at 95% 14%, var(--accent) 0 14px, transparent 15px); }
+.cover.solo::after { content: ""; position: absolute; right: 190px; top: 220px; width: 390px; height: 390px; border-radius: 80px; rotate: 12deg; pointer-events: none;
+  background: radial-gradient(circle at 36% 38%, var(--accent2) 0 80px, transparent 81px), var(--accent3); }
+.cover .dek { color: var(--ink); font-size: 34px; max-width: 720px; }
+.cover.solo .cover-txt { left: 110px; width: 880px; }
+.cover.solo .cover-txt h1 { font-size: calc(142px * var(--fit, 1)); line-height: .98; text-wrap: balance; }
+/* Section: the number on a round sticker. */
+.l-section .sec-n { opacity: 1; display: grid; place-items: center; width: 310px; height: 310px; border-radius: 50%; rotate: 8deg; right: 70px; bottom: 50px;
+  background: var(--accent3); color: #2b2d6e; border: 6px dashed #2b2d6e; font-size: 210px; letter-spacing: 0; }
+.l-section .sec-rule { width: 210px; height: 14px; }
+.l-statement .st-tx { rotate: -1.5deg; transform-origin: 0 50%; }
+.l-big-number .bn-val b { text-shadow: 8px 8px 0 var(--accent2); }

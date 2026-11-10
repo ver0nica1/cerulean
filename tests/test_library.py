@@ -70,6 +70,18 @@ class LibraryTest(unittest.TestCase):
         self.assertEqual(len(problems), 1)
         self.assertIn('recipe("orbit"', problems[0])
 
+    def test_example_can_list_one_scene_per_variant(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            kind = lib.Kind("recipe", Path(tmp), "recipe.js", "recipe", "")
+            (Path(tmp) / "orbit").mkdir()
+            (Path(tmp) / "orbit" / "recipe.js").write_text('/* @recipe {"name": "Orbit"} @end */\nrecipe("orbit", () => {});')
+            example = Path(tmp) / "orbit" / "example.json"
+            example.write_text(json.dumps([{"recipe": "orbit"}, {"recipe": "orbit", "data": {"motion": "b"}}]))
+            self.assertEqual(lib.check(kind, "orbit"), [])
+            self.assertEqual(len(lib.examples(kind, "orbit")), 2)
+            example.write_text(json.dumps([{"recipe": "orbit"}, {"recipe": "other"}]))
+            self.assertEqual(len(lib.check(kind, "orbit")), 1)
+
     def test_gallery_rejects_unknown_slugs(self):
         deck, problems = lib.gallery("stack,nope", "notebook")
         self.assertEqual([s["recipe"] for s in deck["scenes"]], ["stack"])

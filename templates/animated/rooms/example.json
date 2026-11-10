@@ -1,0 +1,37 @@
+[
+  {
+    "title": "rooms · who is where",
+    "theme": "fondo",
+    "recipe": "rooms",
+    "data": {
+      "rooms": [{"label": "Design"}, {"label": "Engineering"}, {"label": "Support"}],
+      "groups": [
+        {"label": "3 HIRES", "room": 0, "count": 3},
+        {"label": "8 HIRES", "room": 1, "count": 8, "step": 2},
+        {"label": "5 HIRES", "room": 2, "count": 5, "step": 2}
+      ]
+    },
+    "steps": [
+      {"text": "Of 16 new hires, **3 went to Design**.", "note": ""},
+      {"text": "**Engineering** took half of them; Support, the rest.", "note": ""}
+    ]
+  },
+  {
+    "title": "rooms · access and time",
+    "theme": "papel",
+    "recipe": "rooms",
+    "data": {
+      "rooms": [
+        {"label": "narrow review, the company approves"},
+        {"label": "publishes without approval"},
+        {"label": "employee-like access"}
+      ],
+      "groups": [{"label": "AUDITORS", "room": 2, "count": 6, "step": 2}],
+      "tally": {"n": 11, "label": "one mark = one week", "from": "August 12", "to": "October 29"}
+    },
+    "steps": [
+      {"text": "Outside evaluators can get **three levels** of access.", "note": ""},
+      {"text": "Six auditors worked inside for **11 weeks**, with the deepest one.", "note": ""}
+    ]
+  }
+]

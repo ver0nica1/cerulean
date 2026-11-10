@@ -31,3 +31,22 @@
 .slide .kick::after { content: ""; display: block; width: 64px; height: 2px; margin-top: 14px; background: currentColor; }
 .l-statement .st-tx { font-style: italic; font-weight: 500; }
 .l-quote .qu-tx { font-style: italic; }
+
+/* ---- The magazine's own compositions: cover, backdrop and the big slides ---- */
+/* A faint twelve-column grid under every page, and a folio hairline at the foot of each slide. */
+.slide, .cover { background-image: repeating-linear-gradient(90deg, transparent 0 132px, color-mix(in srgb, var(--ink) 5%, transparent) 132px 133px); }
+.slide::after { content: ""; position: absolute; left: 110px; right: 110px; bottom: 44px; height: 1px; background: var(--line); pointer-events: none; }
+/* Cover: a masthead rule (thick over thin), a red column on the right, a very large headline ending in a red italic word. */
+.cover::before { content: ""; position: absolute; inset: 46px 60px; pointer-events: none; border-top: 12px solid var(--ink); border-bottom: 2px solid var(--ink);
+  background: linear-gradient(var(--ink), var(--ink)) 0 8px / 100% 2px no-repeat; }
+.cover.solo::after { content: ""; position: absolute; right: 60px; top: 78px; bottom: 48px; width: 250px; background: var(--accent); pointer-events: none; }
+.cover h1 .w:last-child { font-style: italic; color: var(--hl); }
+.cover .dek { font: italic 400 34px/1.35 var(--display); color: var(--ink); max-width: 760px; margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--ink); }
+.cover.solo .cover-txt { left: 100px; width: 1110px; }
+.cover.solo .cover-txt h1 { font-size: calc(150px * var(--fit, 1)); line-height: .98; letter-spacing: -.03em; text-wrap: balance; }
+/* Section: a red italic numeral like a chapter opener, over a thick-and-thin rule the width of the page. */
+.l-section .sec-n { opacity: 1; color: var(--hl); font: italic 700 250px/1 var(--display); right: 110px; bottom: auto; top: var(--head); }
+.l-section .sec-rule { width: 100%; height: 7px; border-radius: 0; background: none; border-top: 4px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.l-statement .st-tx { border-left: 6px solid var(--hl); padding-left: 44px; }
+.l-big-number .bn-val b { font-style: italic; }
+.l-big-number .bn-cap { border-top: 3px solid var(--ink); padding-top: 26px; }

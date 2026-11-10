@@ -4,6 +4,8 @@
     templates/static/<slug>/layout.js + example.json      a slide layout: fixed content that enters step by step
     templates/animated/<slug>/recipe.js + example.json    an animated scene fed with data, for explainers
 
+example.json is one sample scene, or a list of them when the template has variants (one scene per variant).
+
 Every piece starts with a metadata header inside a comment, /* @<tag> {json} @end */, which feeds the catalog: one
 file per kind in catalog/ (styles.md, slides.md, recipes.md), so each deck reads only the kinds its format uses.
 Templates register themselves in JavaScript under their folder's name: layout("<slug>", …) or recipe("<slug>", …).
@@ -98,12 +100,19 @@ def check(kind: Kind, slug: str) -> list[str]:
     if not re.search(rf"""\b{kind.tag}\(\s*["']{re.escape(slug)}["']""", code):
         problems.append(f'{kind.label(slug)}: registers another name; use {kind.tag}("{slug}", …)')
     try:
-        scene = read_json(kind.example(slug))
+        scenes = examples(kind, slug)
     except (OSError, json.JSONDecodeError) as e:
         return problems + [f"{kind.label(slug, EXAMPLE)}: missing or not valid JSON ({e.__class__.__name__})"]
-    if not isinstance(scene, dict) or scene.get(kind.scene_key) != slug:
-        problems.append(f'{kind.label(slug, EXAMPLE)}: must be one scene with "{kind.scene_key}": "{slug}"')
+    if not scenes or any(not isinstance(s, dict) or s.get(kind.scene_key) != slug for s in scenes):
+        problems.append(f'{kind.label(slug, EXAMPLE)}: must be one scene, or a list of scenes (one per variant), '
+                        f'each with "{kind.scene_key}": "{slug}"')
     return problems
+
+
+def examples(kind: Kind, slug: str) -> list:
+    """The sample scenes of a template: example.json holds one scene, or a list with one scene per variant."""
+    found = read_json(kind.example(slug))
+    return found if isinstance(found, list) else [found]
 
 
 def _catalog_line(slug: str, meta: dict) -> str:
@@ -178,18 +187,19 @@ def gallery(only: str | None, style: str) -> tuple[dict, list[str]]:
             if wanted is not None and slug not in wanted:
                 continue
             try:
-                scene = read_json(kind.example(slug))
+                found = [s for s in examples(kind, slug) if isinstance(s, dict)]
             except (OSError, json.JSONDecodeError) as e:
                 problems.append(f"{kind.label(slug, EXAMPLE)}: missing or not valid JSON ({e.__class__.__name__})")
                 continue
-            scene.setdefault("title", slug)
-            scene["theme"] = theme(len(scenes))  # follow the style's rhythm, whatever the example says
-            scenes.append(scene)
+            for scene in found:
+                scene.setdefault("title", slug)
+                scene["theme"] = theme(len(scenes))  # follow the style's rhythm, whatever the example says
+                scenes.append(scene)
             shown.add(slug)
     for missing in sorted((wanted or set()) - shown):
         problems.append(f"--gallery: there is no template called {missing!r}")
     count = lambda kind: sum(1 for s in scenes if kind.scene_key in s)
     deck = {"lang": "en", "format": "slides", "title": "Cerulean gallery", "subtitle": f"Style: {style}",
             "kicker": f"{count(STATIC)} static · {count(ANIMATED)} animated",
-            "design": {"style": style}, "scenes": scenes}
+            "design": {"style": style}, "scenes": scenes, "gallery": True}
     return deck, problems
