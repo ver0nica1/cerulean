@@ -1,0 +1,16 @@
+{
+  "title": "Counted units",
+  "theme": "fondo",
+  "recipe": "units",
+  "data": {
+    "unit": "one square = one month of work at the old pace",
+    "groups": [
+      {"label": "a year, at the old pace", "count": 12},
+      {"label": "a year, at the new pace", "count": 23, "maybe": 13, "step": 2}
+    ]
+  },
+  "steps": [
+    {"text": "A year used to hold **twelve months** of progress.", "note": ""},
+    {"text": "Now a year holds about **two years' worth**, perhaps three.", "note": ""}
+  ]
+}

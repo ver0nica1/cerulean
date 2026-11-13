@@ -1,0 +1,9 @@
+{
+  "slide": "quiz",
+  "theme": "papel",
+  "kicker": "Before you go",
+  "question": "How long can a check-in meeting last?",
+  "options": ["5 minutes", "15 minutes", "As long as it takes"],
+  "answer": 1,
+  "explain": "Fifteen minutes: anything longer becomes its own meeting."
+}

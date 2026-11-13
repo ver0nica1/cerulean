@@ -1,40 +1,52 @@
-{
-  "title": "The document",
-  "theme": "papel",
-  "recipe": "document",
-  "data": {
-    "title": "REQUEST",
-    "lines": 11,
-    "highlights": [
-      {
-        "step": 2,
-        "line": 3
-      },
-      {
-        "step": 2,
-        "line": 6
-      }
-    ],
-    "stamps": [
-      {
-        "step": 3,
-        "text": "Approved",
-        "color": "accent2"
-      }
+[
+  {
+    "title": "document · stamps",
+    "theme": "papel",
+    "recipe": "document",
+    "data": {
+      "title": "REQUEST",
+      "lines": 11,
+      "highlights": [{"step": 2, "line": 3}, {"step": 2, "line": 6}],
+      "stamps": [{"step": 3, "text": "Approved", "color": "accent2"}]
+    },
+    "steps": [
+      {"text": "A **request** arrives.", "note": ""},
+      {"text": "The **key details** are checked.", "note": ""},
+      {"text": "It is **approved**.", "note": ""}
     ]
   },
-  "steps": [
-    {
-      "text": "A **request** arrives.",
-      "note": ""
+  {
+    "title": "document · quotes",
+    "theme": "fondo",
+    "recipe": "document",
+    "data": {
+      "title": "Scaling policy, version 3",
+      "lines": 12,
+      "quotes": [
+        {"text": "double the rate of progress", "step": 1},
+        {"text": "at least three model generations", "step": 2},
+        {"text": "attributable to automated research", "step": 3}
+      ]
     },
-    {
-      "text": "The **key details** are checked.",
-      "note": ""
+    "steps": [
+      {"text": "The line is crossed when progress **doubles**.", "note": ""},
+      {"text": "It has to hold across **three generations** of models.", "note": ""},
+      {"text": "And it has to come from **automated research**, not from more people.", "note": ""}
+    ]
+  },
+  {
+    "title": "document · redact",
+    "theme": "papel",
+    "recipe": "document",
+    "data": {
+      "title": "PUBLIC VERSION",
+      "lines": 11,
+      "redact": [{"step": 2, "line": 2}, {"step": 2, "line": 3}, {"step": 2, "line": 4}, {"step": 2, "line": 6},
+                 {"step": 2, "line": 7}, {"step": 2, "line": 9}]
     },
-    {
-      "text": "It is **approved**.",
-      "note": ""
-    }
-  ]
-}
+    "steps": [
+      {"text": "The auditors wrote a **full report**.", "note": ""},
+      {"text": "Most of the key evidence was **redacted** before it went public.", "note": ""}
+    ]
+  }
+]

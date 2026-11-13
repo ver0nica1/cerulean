@@ -4,7 +4,7 @@
     {
       "name": "cerulean-line",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["scripts/preview.py", "--template", "line,range,causes,rooms", "--style", "swiss"],
+      "runtimeArgs": ["scripts/preview.py", "--template", "events,units,document,bullets,quiz", "--style", "swiss"],
       "port": 8767
     },
     {

@@ -1,0 +1,17 @@
+{
+  "title": "Events on a timeline",
+  "theme": "papel",
+  "recipe": "events",
+  "data": {
+    "events": [
+      {"date": "2026-09-12", "label": "the director asks to slow down"},
+      {"date": "2026-10-26", "label": "the company files to go public", "step": 2},
+      {"date": "2026-11-05", "label": "the audit is published", "note": "6 newsrooms", "stack": 6, "step": 3}
+    ]
+  },
+  "steps": [
+    {"text": "In **September**, the director wrote that progress must slow down.", "note": ""},
+    {"text": "Six weeks later the company **filed to go public**.", "note": ""},
+    {"text": "The audit came out in November, and **six newsrooms** covered it that day.", "note": ""}
+  ]
+}
