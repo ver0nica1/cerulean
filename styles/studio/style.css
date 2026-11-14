@@ -1,0 +1,51 @@
+/* @style
+{
+ "name": "Cobalt studio",
+ "scheme": "light",
+ "mood": ["clean", "professional", "sharp", "high-contrast"],
+ "best_for": "agency and consulting decks, proposals, brand and design work, company presentations, portfolios, quotes as the hero",
+ "avoid_for": "children, history, nature, cozy or handmade topics",
+ "palette": {"bg": "#0b0b10", "ink": "#f7f7f5", "paper": "#ffffff", "paper_ink": "#0b0b10",
+             "accent": "#3b5bff", "accent2": "#ff7a59", "accent3": "#19c2a0", "neutral": "#6c6f7d"},
+ "fonts": {"display": "Sora:600;700;800", "text": "Sora:300;400;500", "num": "DM Mono:400;500"},
+ "rhythm": "claro",
+ "medium": "plano",
+ "motion": "preciso"
+}
+@end */
+
+/* White pages cut by panels of cobalt blue, with a black bar where they meet and small square marks in the corners.
+   Inspired by the "Electric Studio" preset of frontend-slides (MIT). */
+.card { border-radius: 0; box-shadow: none; border: 1.5px solid var(--line); border-top: 10px solid var(--accent); }
+.card li .num { font-family: var(--num); }
+.cover h1 { font-weight: 800; letter-spacing: -.04em; line-height: .98; }
+.cover .kick { font-family: var(--num); letter-spacing: .08em; }
+.lab { border-radius: 0; box-shadow: none; border-top: 5px solid currentColor; background: var(--bg); }
+.end-card { border-radius: 0; box-shadow: none; border: 1.5px solid var(--line); border-top: 10px solid var(--accent); }
+
+.slide { --radius: 0px; --panel: #f2f3f8; --panel-shadow: none; }
+.slide .panel { border-top: 8px solid var(--accent); }
+.slide h2 { font-weight: 700; letter-spacing: -.035em; line-height: 1.02; }
+.slide .kick { font-family: var(--num); letter-spacing: .08em; }
+
+/* ---- The studio's own compositions: cover, backdrop and the big slides ---- */
+/* A cobalt band along the foot of every slide and a black square mark in the top corner. */
+.slide::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; pointer-events: none; background: var(--accent); }
+.slide::after { content: ""; position: absolute; right: 110px; top: 50px; width: 22px; height: 22px; pointer-events: none; background: var(--ink); }
+/* Cover: a cobalt panel on the right behind a black bar, with one white ring; a square mark over the title. */
+.cover::before { content: ""; position: absolute; left: 110px; top: 84px; width: 30px; height: 30px; pointer-events: none; background: var(--accent); }
+.cover.solo::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 520px; pointer-events: none; box-shadow: -20px 0 0 var(--ink);
+  background: radial-gradient(circle at 50% 50%, transparent 0 166px, #ffffff 167px 172px, transparent 173px), var(--accent); }
+.cover h1 .w:last-child { color: var(--hl); }
+.cover .dek { color: var(--ink); font-weight: 300; max-width: 700px; }
+.cover.solo .cover-txt { left: 110px; width: 860px; }
+.cover.solo .cover-txt h1 { font-size: calc(124px * var(--fit, 1)); text-wrap: balance; }
+/* Section: the whole page turns cobalt. */
+.l-section { background-color: var(--accent); color: #ffffff; --ink: #ffffff; --hl: #ffffff; --mute: #dfe4ff; --line: #ffffff66; }
+.l-section::before { background: var(--paper-ink, #0b0b10); }
+.l-section::after { background: #ffffff; }
+.l-section .sec-n { opacity: .22; color: #ffffff; font-size: 520px; right: 60px; bottom: -40px; }
+.l-section .sec-rule { width: 130px; height: 10px; border-radius: 0; background: #ffffff; }
+/* Statement: the quote is the hero, against a black bar. */
+.l-statement .st-tx { font-weight: 700; letter-spacing: -.035em; font-size: 84px; line-height: 1.06; border-left: 18px solid var(--ink); padding-left: 46px; }
+.l-big-number .bn-val b { font-family: var(--display); font-weight: 800; letter-spacing: -.05em; font-size: 300px; }

@@ -7,7 +7,7 @@
  "avoid_for": "children, gaming, very playful or technical-hacker topics",
  "palette": {"bg": "#16181d", "ink": "#f2ede4", "paper": "#f4efe6", "paper_ink": "#1a1714",
              "accent": "#c8372d", "accent2": "#2b5c8a", "accent3": "#b8892c", "neutral": "#6b6258"},
- "fonts": {"display": "Playfair Display", "text": "Libre Franklin:400;500;600;700", "num": "Playfair Display"},
+ "fonts": {"display": "Playfair Display:400;500;600;700;500i;700i", "text": "Libre Franklin:400;500;600;700", "num": "Playfair Display:400;500;600;700;500i;700i"},
  "rhythm": "claro",
  "medium": "plano",
  "motion": {"smooth": 0.12, "curve": [0.65, 0, 0.25, 1]}

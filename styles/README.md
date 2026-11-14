@@ -49,6 +49,9 @@ It starts with a metadata header (JSON inside a comment), followed by the skin C
 
 (Real headers are plain JSON: no `//` comments.)
 
+- Fonts: `"Name"` or `"Name:400;700"` with its weights. The viewer never fakes an italic: if the skin uses
+  `font-style: italic`, ask for the italic weights with an `i`: `"Playfair Display:400;700;400i"`.
+
 - The skin follows the same rules as a custom skin (see `references/direction.md`): it can't touch the control bar,
   notes or stage, load external files or use `position: fixed`. `build.py` rejects it with a warning otherwise.
 - Text must reach 4.5:1 contrast on its background; check with `CERULEAN_REPORT()`.

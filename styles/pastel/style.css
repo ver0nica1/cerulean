@@ -1,0 +1,52 @@
+/* @style
+{
+ "name": "Pastel pills",
+ "scheme": "light",
+ "mood": ["friendly", "soft", "modern", "approachable"],
+ "best_for": "onboarding and team culture, wellbeing, education for adults, apps and services for people, community projects, gentle product intros",
+ "avoid_for": "cybersecurity, hard engineering, finance reports, somber or urgent topics",
+ "palette": {"bg": "#2b2540", "ink": "#fbf6ef", "paper": "#fbf6ef", "paper_ink": "#2b2540",
+             "accent": "#7c6ad6", "accent2": "#ef8fb5", "accent3": "#4fae93", "neutral": "#8a84a3"},
+ "fonts": {"display": "Plus Jakarta Sans:600;700;800", "text": "Plus Jakarta Sans:400;500;600", "num": "Plus Jakarta Sans:600;700;800"},
+ "rhythm": "claro",
+ "medium": "recorte",
+ "motion": {"smooth": 0.09, "curve": [0.4, 0, 0.2, 1]}
+}
+@end */
+
+/* Cream pages, white rounded cards with soft shadows and rows of pastel pills of different heights.
+   Inspired by the "Pastel Geometry" and "Split Pastel" presets of frontend-slides (MIT). */
+.card { border-radius: 30px; box-shadow: 0 22px 44px -26px #2b254066; }
+.t-papel .card { background: #ffffff; }
+.cover h1 { font-weight: 800; letter-spacing: -.03em; line-height: 1.02; }
+.cover .kick { display: inline-block; background: color-mix(in srgb, var(--accent3) 26%, transparent); color: var(--ink); padding: 6px 18px; border-radius: 999px;
+  letter-spacing: .08em; font-weight: 600; margin-bottom: 26px; }
+.lab { border-radius: 999px; box-shadow: 0 10px 22px -14px #2b254066; padding: 6px 20px 8px; }
+.end-card { border-radius: 30px; box-shadow: 0 22px 44px -26px #2b254066; }
+
+.slide { --radius: 28px; --panel-shadow: 0 20px 44px -26px #2b254055; }
+.t-papel.slide { --panel: #ffffff; }
+.slide h2 { font-weight: 800; letter-spacing: -.03em; }
+.slide .kick { align-self: flex-start; background: color-mix(in srgb, var(--hl) 18%, transparent); color: var(--ink); padding: 6px 18px; border-radius: 999px; letter-spacing: .08em; }
+
+/* ---- The pastel's own compositions: cover, backdrop and the big slides ---- */
+/* Three little pills at the top of every slide and a soft disc in the lower corner. */
+.slide::before { content: ""; position: absolute; right: 190px; top: 34px; width: 16px; height: 58px; border-radius: 999px; pointer-events: none;
+  background: var(--accent2); box-shadow: 28px 14px 0 var(--accent), 56px -6px 0 var(--accent3); }
+.slide::after { content: ""; position: absolute; right: 60px; bottom: 60px; width: 250px; height: 250px; border-radius: 50%; pointer-events: none;
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+/* Cover: a lavender panel with a fine grid on the right, and five tall pills standing on it. */
+.cover::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 46%; pointer-events: none;
+  background: linear-gradient(#ffffff99 0 1.5px, transparent 1.5px) 0 0 / 46px 46px, linear-gradient(90deg, #ffffff99 0 1.5px, transparent 1.5px) 0 0 / 46px 46px, #e6defa; }
+.cover.solo::after { content: ""; position: absolute; right: 540px; top: 330px; width: 56px; height: 230px; border-radius: 999px; pointer-events: none;
+  background: var(--accent2); box-shadow: 84px 50px 0 var(--accent3), 168px -40px 0 var(--accent), 252px 30px 0 #f2c48d, 336px -10px 0 #5a4fa0; }
+.cover h1 .w:last-child { color: var(--hl); }
+.cover .dek { color: var(--ink); max-width: 660px; }
+.cover.solo .cover-txt { left: 110px; width: 720px; }
+.cover.solo .cover-txt h1 { font-size: calc(116px * var(--fit, 1)); text-wrap: balance; }
+/* Section: the number inside a tall pill, and a three-color pill for a rule. */
+.l-section .sec-n { opacity: 1; display: grid; place-items: center; width: 210px; height: 330px; border-radius: 999px; background: var(--hl); color: #ffffff;
+  font-size: 150px; letter-spacing: 0; right: 110px; bottom: 60px; }
+.l-section .sec-rule { width: 190px; height: 16px; border-radius: 999px; background: linear-gradient(90deg, var(--accent2) 0 33%, var(--accent3) 33% 66%, var(--accent) 66%); }
+/* Statement: the sentence on a white rounded card. */
+.l-statement .st-tx { background: #ffffff; padding: 54px 60px; border-radius: 36px; box-shadow: 0 24px 50px -28px #2b254066; }

@@ -7,7 +7,7 @@
  "avoid_for": "parties, sports, gaming, history, emotional storytelling",
  "palette": {"bg": "#13202e", "ink": "#eaf1f6", "paper": "#f4f7f9", "paper_ink": "#14263a",
              "accent": "#1a9e95", "accent2": "#e5674e", "accent3": "#6a5acd", "neutral": "#6d7c8a"},
- "fonts": {"display": "Instrument Serif", "text": "Instrument Sans", "num": "DM Mono"},
+ "fonts": {"display": "Instrument Serif:400;400i", "text": "Instrument Sans", "num": "DM Mono"},
  "rhythm": "claro",
  "medium": "plano",
  "motion": {"smooth": 0.14, "curve": [0.7, 0, 0.2, 1]}

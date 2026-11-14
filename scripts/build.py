@@ -177,12 +177,24 @@ def _mundo(w):
     return {"setting": str(w.get("setting", "")).strip()[:200], "objects": objetos}
 
 
-_FUENTE = re.compile(r"([A-Za-z0-9 ]{2,40}?)\s*(?::\s*(\d{3}(?:;\d{3}){0,5}))?")
+_FUENTE = re.compile(r"([A-Za-z0-9 ]{2,40}?)\s*(?::\s*(\d{3}i?(?:;\d{3}i?){0,7}))?")
+
+
+def _eje(pesos: str) -> str:
+    """El eje de una familia para Google Fonts: ":wght@400;700", o con cursivas ("400;700;400i") ":ital,wght@0,400;0,700;1,400"."""
+    if not pesos:
+        return ""
+    rectas = sorted(w for w in pesos.split(";") if not w.endswith("i"))
+    cursivas = sorted(w[:-1] for w in pesos.split(";") if w.endswith("i"))
+    if not cursivas:
+        return ":wght@" + ";".join(rectas)
+    return ":ital,wght@" + ";".join([f"0,{w}" for w in rectas] + [f"1,{w}" for w in cursivas])
 
 
 def _fuentes(f):
     """Las tres voces tipográficas: display (portada y títulos), text (tarjeta de pasos) y num (cifras y rótulos), y
-    las extra que use la piel. Cualquier fuente de Google Fonts, como "Nombre" o "Nombre:400;700" (sus pesos)."""
+    las extra que use la piel. Cualquier fuente de Google Fonts, como "Nombre" o "Nombre:400;700" (sus pesos); una
+    cursiva se pide con una i ("Nombre:400;700;400i"), porque el visor no las inventa."""
     if not isinstance(f, dict):
         return None
     out, pesos = {}, {}
@@ -744,7 +756,7 @@ def html(dk: dict, cabeza: str = "", escenas_js: str = "", piel_css: str = "") -
         # Una hoja por familia: si una falla, las demás cargan igual.
         enlaces = "\n".join(
             f'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={n.replace(" ", "+")}'
-            f'{":wght@" + w if w else ""}&amp;display=swap">' for n, w in f["weights"].items())
+            f'{_eje(w)}&amp;display=swap">' for n, w in f["weights"].items())
     mov = d.get("motion")
     if isinstance(mov, dict) and mov.get("curve"):
         estilo += f";--ease-pop:cubic-bezier({','.join(str(v) for v in mov['curve'])})"

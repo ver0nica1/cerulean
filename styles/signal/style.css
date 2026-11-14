@@ -1,0 +1,47 @@
+/* @style
+{
+ "name": "Signal card",
+ "scheme": "dark",
+ "mood": ["confident", "bold", "modern", "direct"],
+ "best_for": "pitches, product and company updates, keynotes, strategy, results that must land, talks with few words per slide",
+ "avoid_for": "children, history, delicate or emotional topics, long detailed reports",
+ "palette": {"bg": "#17171a", "ink": "#f6f4ef", "paper": "#f1ede6", "paper_ink": "#17171a",
+             "accent": "#ff5a36", "accent2": "#ffc233", "accent3": "#4dd4c0", "neutral": "#6e6e76"},
+ "fonts": {"display": "Archivo Black:400", "text": "Hanken Grotesk:400;500;600", "num": "Archivo Black:400"},
+ "rhythm": "oscuro",
+ "medium": "plano",
+ "motion": {"smooth": 0.13, "curve": [0.7, 0, 0.2, 1]}
+}
+@end */
+
+/* One loud colored card on charcoal: everything important sits on a block of flat color, in heavy black type.
+   Inspired by the "Bold Signal" preset of frontend-slides (MIT). */
+.card { border-radius: 22px; border-left: 14px solid var(--hl); box-shadow: none; }
+.card li .num { font-family: var(--num); }
+.cover h1 { letter-spacing: -.02em; line-height: 1; }
+.cover .kick { letter-spacing: .16em; font-weight: 600; }
+.lab { border-radius: 10px; box-shadow: none; border-left: 8px solid currentColor; }
+.end-card { border-radius: 22px; border-left: 14px solid var(--hl); box-shadow: none; }
+
+.slide { --radius: 22px; --panel: var(--hl); --panel-shadow: none; }
+.slide .panel, .slide .panel p, .slide .panel h3, .slide .panel .ca-tag { color: #17171a; }
+.slide h2 { letter-spacing: -.02em; line-height: 1.02; }
+.slide .kick { letter-spacing: .16em; }
+
+/* ---- The signal's own compositions: cover, backdrop and the big slides ---- */
+/* A soft diagonal sheen on the charcoal. */
+.slide, .cover { background-image: linear-gradient(135deg, transparent 0 30%, #ffffff0d 50%, transparent 70%); }
+/* Cover: the title lives on a big colored card, bottom-left, under a giant "01". */
+.cover.solo::before { content: ""; position: absolute; left: 70px; top: 70px; bottom: 70px; width: 1010px; border-radius: 30px; pointer-events: none; background: var(--accent); }
+.cover.solo::after { content: "01"; position: absolute; left: 130px; top: 104px; pointer-events: none; font: 400 120px/1 var(--display); color: #17171a; }
+.cover.solo .cover-txt { left: 130px; width: 880px; top: auto; bottom: 126px; margin-block: 0; }
+.cover.solo .cover-txt h1 { font-size: calc(112px * var(--fit, 1)); color: #17171a; text-wrap: balance; }
+.cover.solo .kick { color: #17171a; }
+.cover.solo .dek { color: #17171a; font-weight: 500; max-width: 760px; margin-top: 26px; }
+/* Section: the number first, small and loud, then a bar the width of the page. */
+.l-section .sec-n { position: static; opacity: 1; color: var(--hl); font-size: 130px; letter-spacing: 0; }
+.l-section .sec-rule { width: 100%; height: 12px; border-radius: 6px; }
+/* Statement: the sentence on a card of its own. */
+.l-statement .st-tx { background: var(--hl); color: #17171a; padding: 52px 58px; border-radius: 28px; }
+.l-statement .st-tx strong { color: #17171a; text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .12em; }
+.l-big-number .bn-val b { font-size: 300px; }

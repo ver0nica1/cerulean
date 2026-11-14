@@ -7,7 +7,7 @@
  "avoid_for": "technology, startups, children, sports",
  "palette": {"bg": "#2a2019", "ink": "#f1e6d2", "paper": "#efe4cf", "paper_ink": "#2b211a",
              "accent": "#b23a2e", "accent2": "#2f5d8a", "accent3": "#b8913a", "neutral": "#6e5a45"},
- "fonts": {"display": "Cormorant Garamond", "text": "EB Garamond", "num": "Cormorant Garamond"},
+ "fonts": {"display": "Cormorant Garamond:400;500;600;500i;600i", "text": "EB Garamond:400;500;600;400i", "num": "Cormorant Garamond:400;500;600;500i;600i"},
  "rhythm": "claro",
  "medium": "grabado",
  "motion": "solemne"

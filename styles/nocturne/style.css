@@ -1,0 +1,54 @@
+/* @style
+{
+ "name": "Nocturne",
+ "scheme": "dark",
+ "mood": ["elegant", "sophisticated", "quiet", "premium"],
+ "best_for": "luxury and fashion, art, wine and food, architecture and interiors, weddings and events, personal essays, premium brands",
+ "avoid_for": "children, technical tutorials, data-heavy reports, playful or loud topics",
+ "palette": {"bg": "#101012", "ink": "#ebe6df", "paper": "#efe9e1", "paper_ink": "#1a1816",
+             "accent": "#d9a878", "accent2": "#e5b3b6", "accent3": "#8fb5a3", "neutral": "#8d8780"},
+ "fonts": {"display": "Bodoni Moda:400;500;700;400i;500i", "text": "Jost:300;400;500", "num": "Bodoni Moda:400;500;700;400i;500i"},
+ "rhythm": "oscuro",
+ "medium": "plano",
+ "motion": "fluido"
+}
+@end */
+
+/* A dark room with warm light: italic high-contrast serif, soft glows in a corner, hairline frames and one thin
+   vertical line. Inspired by the "Dark Botanical" preset of frontend-slides (MIT). */
+.card { border-radius: 2px; box-shadow: none; background: color-mix(in srgb, var(--bg) 92%, var(--ink)); border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); }
+.card li .num { font-style: italic; }
+.cover h1 { font-weight: 400; font-style: italic; letter-spacing: -.01em; line-height: 1.02; }
+.cover .kick { letter-spacing: .42em; font-size: 18px; font-weight: 400; color: var(--accent); }
+.lab { border-radius: 2px; box-shadow: none; border: 1px solid currentColor; background: var(--bg); }
+.end-card { border-radius: 2px; box-shadow: none; background: transparent; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); }
+
+.slide { --radius: 2px; --panel: transparent; --panel-shadow: none; --panel-line: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+.slide h2 { font-weight: 400; font-style: italic; letter-spacing: -.01em; }
+.slide .kick { letter-spacing: .42em; font-size: 17px; font-weight: 400; }
+.slide strong { font-weight: 500; }
+.l-quote .qu-tx, .l-statement .st-tx { font-style: italic; font-weight: 400; }
+
+/* ---- The nocturne's own compositions: cover, backdrop and the big slides ---- */
+/* Warm glows in the lower corner of every slide and a thin vertical line on the left. */
+.slide::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 92% 88%, color-mix(in srgb, var(--accent) 30%, transparent) 0, transparent 300px),
+    radial-gradient(circle at 80% 100%, color-mix(in srgb, var(--accent2) 22%, transparent) 0, transparent 260px); }
+.slide::after { content: ""; position: absolute; left: 62px; top: 150px; bottom: 70px; width: 1px; pointer-events: none; background: color-mix(in srgb, var(--accent) 60%, transparent); }
+/* Cover: three overlapping glows on the right, the vertical line, and a light italic title. */
+.cover::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 82% 26%, color-mix(in srgb, var(--accent) 46%, transparent) 0, transparent 330px),
+    radial-gradient(circle at 70% 50%, color-mix(in srgb, var(--accent2) 34%, transparent) 0, transparent 290px),
+    radial-gradient(circle at 90% 62%, color-mix(in srgb, var(--accent3) 30%, transparent) 0, transparent 260px); }
+.cover.solo::after { content: ""; position: absolute; left: 100px; top: 130px; bottom: 130px; width: 1px; pointer-events: none; background: var(--accent); }
+.cover h1 .w:last-child { color: var(--accent); }
+.cover .dek { color: var(--ink); font-weight: 300; max-width: 660px; }
+.cover.solo .cover-txt { left: 160px; width: 880px; }
+.cover.solo .cover-txt h1 { font-size: calc(128px * var(--fit, 1)); text-wrap: balance; }
+/* Section: a tall italic numeral and, for a rule, a short vertical line. */
+.l-section .sec-n { opacity: .9; color: var(--accent); font: italic 400 320px/1 var(--display); letter-spacing: 0; right: 110px; bottom: 40px; }
+.l-section .sec-rule { width: 1px; height: 90px; border-radius: 0; background: var(--accent); }
+/* Statement: centered, under a short vertical line. */
+.l-statement .sl { align-items: center; text-align: center; }
+.l-statement .st-tx::before { content: ""; display: block; width: 1px; height: 70px; margin: 0 auto 34px; background: var(--accent); }
+.l-big-number .bn-val b { font-weight: 400; font-style: italic; }

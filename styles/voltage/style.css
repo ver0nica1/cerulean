@@ -1,0 +1,53 @@
+/* @style
+{
+ "name": "Voltage",
+ "scheme": "mixed",
+ "mood": ["creative", "energetic", "retro-modern", "loud"],
+ "best_for": "creative work, music and culture, festivals, marketing and social media, youth audiences, workshops, design talks",
+ "avoid_for": "finance reports, health, grief, institutional or legal topics",
+ "palette": {"bg": "#14142b", "ink": "#f4f4ff", "paper": "#0a5bff", "paper_ink": "#ffffff",
+             "accent": "#d4ff00", "accent2": "#ff5fa8", "accent3": "#5ce1ff", "neutral": "#7a7fb0"},
+ "fonts": {"display": "Syne:700;800", "text": "Space Grotesk:400;500;600", "num": "Space Mono:400;700"},
+ "rhythm": "alterno",
+ "medium": "bauhaus",
+ "motion": "energico"
+}
+@end */
+
+/* Electric blue against midnight, with neon-lime badges and a halftone burst: pages alternate between the two.
+   Inspired by the "Creative Voltage" preset of frontend-slides (MIT). */
+.card { border-radius: 26px; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--accent); }
+.card li .num { font-family: var(--num); font-weight: 700; }
+.cover h1 { font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.cover .kick { display: inline-block; background: var(--accent); color: #14142b; padding: 6px 18px; border-radius: 999px; rotate: -3deg;
+  font-family: var(--num); font-weight: 700; letter-spacing: .06em; margin-bottom: 30px; }
+.lab { border-radius: 999px; border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--accent); padding: 6px 20px 8px; }
+.end-card { border-radius: 26px; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--accent); }
+
+.slide { --radius: 26px; --panel: color-mix(in srgb, var(--bg) 82%, #000000); --panel-line: 3px solid var(--ink); --panel-shadow: 10px 10px 0 var(--accent); }
+.slide h2 { font-weight: 800; letter-spacing: -.03em; line-height: 1.02; }
+.slide .kick { align-self: flex-start; background: var(--accent); color: #14142b; padding: 6px 18px; border-radius: 999px; rotate: -2deg;
+  font-family: var(--num); letter-spacing: .06em; }
+.slide strong { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: .14em; text-underline-offset: .12em; }
+
+/* ---- Voltage's own compositions: cover, backdrop and the big slides ---- */
+/* A neon bar down the left edge and a burst of halftone dots from the top-right corner. */
+.slide::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 16px; pointer-events: none; background: var(--accent); }
+.slide::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--ink) 34%, transparent) 3px, transparent 3.6px) 0 0 / 24px 24px;
+  -webkit-mask-image: radial-gradient(circle at 100% 0, #000000 0 280px, transparent 430px); mask-image: radial-gradient(circle at 100% 0, #000000 0 280px, transparent 430px); }
+/* Cover: an electric-blue panel with halftone on the left carrying the title, a neon disc with a ring on the right. */
+.cover.solo::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 930px; pointer-events: none;
+  background: radial-gradient(circle, #ffffff2e 3px, transparent 3.6px) 0 0 / 24px 24px, linear-gradient(90deg, #0a5bff 0 60%, #0a5bffcc), #0a5bff; }
+.cover.solo::after { content: ""; position: absolute; right: 190px; top: 270px; width: 300px; height: 300px; border-radius: 50%; pointer-events: none;
+  background: var(--accent); box-shadow: 0 0 0 16px var(--bg), 0 0 0 20px var(--accent); }
+.cover h1 .w:last-child { color: var(--accent); }
+.cover .dek { color: var(--ink); max-width: 700px; }
+.cover.solo .cover-txt { left: 110px; width: 760px; }
+.cover.solo .cover-txt h1 { font-size: calc(112px * var(--fit, 1)); text-wrap: balance; }
+/* Section: a giant neon numeral with a hard shadow, and a neon pill for a rule. */
+.l-section .sec-n { opacity: 1; color: var(--accent); text-shadow: 10px 10px 0 #14142b; font-size: 400px; right: 50px; bottom: 0; }
+.l-section .sec-rule { width: 200px; height: 20px; border-radius: 999px; background: var(--accent); }
+.l-statement .st-tx { font-weight: 800; letter-spacing: -.03em; }
+.l-big-number .bn-val { color: var(--accent); }
+.l-big-number .bn-val b { font-family: var(--display); font-weight: 800; font-size: 290px; letter-spacing: -.05em; }
